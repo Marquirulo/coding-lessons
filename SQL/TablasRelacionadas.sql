@@ -1,7 +1,3 @@
--- CONTAR RESULTADOS --
-SELECT COUNT (*) --Cuenta el número de registros
-FROM periodico;
-
 -- JUNTAR TABLAS MEDIANTE PK/FK (INNER JOINS) Este JOIN, muestra solo los valores que aparecen en ambas tablas y los relaciona --
 SELECT *
 FROM periodico

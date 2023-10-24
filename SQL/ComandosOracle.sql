@@ -28,9 +28,20 @@ SELECT *
   FROM employees
 WHERE salary {SIMBOLOS ARITM} 1000 
 	[AND | OR] job_id {SIMBOLOS ARITM} 'texto'; --SIMBOLOS ARITM: { = | < | > | >= | <= | <> | != }
---
-SELECT DISTINCT job_id --Esto filtra todos los registros iguales en 1 (Sirve para saber las posibilidades de un campo)
+
+--DISTINCT
+SELECT DISTINCT job_id --Esto filtra todos los registros iguales en 1 (Sirve para saber las valores únicos de un campo)
 	FROM employees;
+
+--LIKE / NOT LIKE //(_) = 1 caracter o espacio (%) = Cualquier cantidad de carácteres
+SELECT *
+    FROM employees
+WHERE last_name LIKE '_o%';
+
+--IS NULL / IS NOT NULL
+SELECT *
+    FROM employees
+WHERE commission_pct IS NOT NULL;
 
 /*--CAMPOS CALCULADOS--*/
 SELECT first_name Nombre, last_name Apellido, salary Salario, salary*1.05 Incremento --El campo Incremento es un campo creado mediante un CALC_ARITM

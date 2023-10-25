@@ -66,5 +66,9 @@ DATE -> Fecha
   WHERE department_id = 30;
 
   SELECT first_name ||' '|| last_name Nombre_Completo --Concatenamos Nombre y Apellido en un único campo
-      FROM employees
-  WHERE department_id = 30;
+      FROM employees  WHERE department_id = 30;
+
+/*--------------------------------------TABLA DUAL----------------------------------------------
+  Es una tabla para comprobaciones en Oracle, solo tiene una columna vacía llamada DUMMY*/
+SELECT SQRT(5) FROM DUAL;
+SELECT SYSDATE FROM DUAL;

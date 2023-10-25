@@ -34,7 +34,7 @@ DATE -> Fecha
       FROM employees
   WHERE department_id = 100
       AND (last_name LIKE '%s%'	--Al meter el OR entre parentesis, localizo la condición: Con() -> Que sea del departamento 100 y tenga s o S
-          OR last_name LIKE '%S%');						       -- Sin() -> Que sea del departamento 100 y tenga s o Solo que tenga S
+          OR last_name LIKE '%S%');						                                         -- Sin() -> Que sea del departamento 100 y tenga s o Solo que tenga S
 
 --DISTINCT
   SELECT DISTINCT job_id --Esto filtra todos los registros iguales en 1 (Sirve para saber las valores únicos de un campo)
@@ -50,10 +50,15 @@ DATE -> Fecha
       FROM employees
   WHERE commission_pct IS NOT NULL;
 
-/*--LISTADOS DE VALORES--*/
+--LISTADOS DE VALORES
   SELECT *
       FROM employees
   WHERE commission_pct {IN | NOT IN} (V1,V2,V3); --Filtra por varios valores nº(1,2,3) o texto('a','b','c')
+
+--INTERVALOS
+  SELECT *
+      FROM employees
+  WHERE salary {BETWEEN | NOT BETWEEN} 5000 AND 20000;
 
 /*--CAMPOS CALCULADOS--*/
   SELECT first_name Nombre, last_name Apellido, salary Salario, salary*1.05 Incremento --El campo Incremento es un campo creado mediante un CALC_ARITM

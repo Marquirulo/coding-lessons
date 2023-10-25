@@ -1,0 +1,81 @@
+--******** EJER1 **********
+SELECT emp_no, apellido, oficio, dept_no
+    FROM EMPLE
+WHERE dept_no = 20
+ORDER BY apellido;
+
+--******** EJER2 **********
+SELECT *
+    FROM EMPLE
+WHERE oficio = 'ANALISTA'
+ORDER BY emp_no;
+
+--******** EJER3 **********
+SELECT *
+    FROM EMPLE
+WHERE oficio = 'ANALISTA'
+    AND dept_no = 20
+ORDER BY apellido, emp_no DESC;
+
+--******** EJER4 **********
+SELECT *
+    FROM EMPLE
+WHERE apellido LIKE 'J%';
+
+--******** EJER5 **********
+SELECT *
+    FROM EMPLE
+WHERE apellido LIKE '_R%';
+
+--******** EJER6 **********
+SELECT *
+    FROM EMPLE
+WHERE apellido LIKE 'A%O%';
+
+--******** EJER7 **********
+SELECT apellido
+    FROM EMPLE
+WHERE dept_no IN (10,30);
+
+--******** EJER8 **********
+SELECT apellido
+    FROM EMPLE
+WHERE dept_no NOT IN (10,30);
+
+--******** EJER9 **********
+SELECT apellido
+    FROM EMPLE
+WHERE oficio IN ('VENDEDOR', 'ANALISTA', 'EMPLEADO');
+
+--******** EJER10 **********
+SELECT apellido
+    FROM EMPLE
+WHERE oficio NOT IN ('VENDEDOR', 'ANALISTA', 'EMPLEADO');
+
+--******** EJER11 **********
+SELECT apellido, salario
+    FROM emple
+WHERE salario BETWEEN 150000 AND 200000;
+
+--******** EJER12 **********
+SELECT apellido, salario
+    FROM emple
+WHERE salario NOT BETWEEN 150000 AND 200000;
+
+--******** EJER13 **********
+SELECT apellido, salario, dept_no
+    FROM emple
+WHERE salario > 200000
+    AND dept_no IN (10, 20);
+
+--******** EJER14 **********
+SELECT *
+    FROM emple
+WHERE apellido LIKE 'A%'
+    AND oficio LIKE '%E%';
+    
+--******** EJER15 **********
+SELECT apellido, salario, dept_no
+    FROM emple
+WHERE salario > 200000
+    AND dept_no IN (10, 20);

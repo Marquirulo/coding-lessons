@@ -79,3 +79,17 @@ SELECT apellido, salario, dept_no
     FROM emple
 WHERE salario > 200000
     AND dept_no IN (10, 20);
+
+--******** EJER16 **********
+SELECT salario, comision, salario+comision
+    FROM emple;
+    
+--******** EJER17 ********** 
+SELECT nombre_alumno AS NOMBRE, (nota1+nota2+nota3)/3 AS MEDIA
+    FROM notas_alumnos;
+    
+--******** EJER18 ********** 
+SELECT nombre_alumno AS NOMBRE
+    FROM notas_alumnos
+WHERE nota1 = 7
+    AND (nota1+nota2+nota3)/3 > 6;

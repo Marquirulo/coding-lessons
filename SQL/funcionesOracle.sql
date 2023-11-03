@@ -59,7 +59,7 @@ SELECT nombre,
       WHEN 1 THEN salario*0.85
       WHEN 2 THEN salario*0.93
       WHEN 3 THEN salario*0.96
-      ELSE salario
+      ELSE salario*0.2
   END
 FROM empleados;
 /*Puede haber CASE complejos indicando  ops. lógicas*/
@@ -73,11 +73,11 @@ SELECT nombre,
 FROM alumnos;
 
 -- DECODE --
--- Permite simplificar los CASE SIMPLES
+-- Permite simplificar los CASE SIMPLES (No puedes usar ops. lógicos)
 SELECT nombre,
 DECODE(cotizacion,
   1, salario*0.85,
-  2,salario * 0.93,
-  3,salario * 0.96,
-  salario)
+  2, salario*0.93,
+  3, salario*0.96,
+  salario*0.2) -- El ELSE se pone al final en valor único
 FROM empleados;

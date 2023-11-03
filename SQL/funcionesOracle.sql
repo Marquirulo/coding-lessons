@@ -66,8 +66,8 @@ FROM empleados;
 SELECT nombre,
   CASE 
       WHEN nota>=5 THEN 'Suficiente'
-      WHEN nota>=5 THEN 'Notable'
-      WHEN nota>=5 THEN 'Sobresaliente'
+      WHEN nota>=7 THEN 'Notable'
+      WHEN nota>=9 THEN 'Sobresaliente'
       ELSE 'Suspenso'
   END AS calificacion
 FROM alumnos;

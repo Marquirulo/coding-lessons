@@ -16,7 +16,7 @@ WHERE e.dept_no = d.dept_no
     AND UPPER(e.oficio) = 'ANALISTA';
 
 /*4*/
-SELECT al.apenom, notas.nota
+SELECT DISTINCT al.apenom
     FROM alumnos al, notas
 WHERE al.dni = notas.dni
     AND UPPER(al.pobla) = 'MADRID'

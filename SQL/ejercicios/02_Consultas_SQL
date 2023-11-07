@@ -43,9 +43,10 @@ FROM pasajero;
 
 /**EJ15**/
 SELECT p_nombre||' '||p_apellido Nombre, 
-    CASE 
+    DECODE(p_perfil, NULL, 'SIN_PERFIL', 'LOW_COST','TURISTA' , p_perfil) Perfil
+    /*CASE 
         WHEN p_perfil IS NULL THEN 'SIN_PERFIL'
         WHEN p_perfil = 'LOW_COST' THEN 'TURISTA'
         ELSE p_perfil
-    END Perfil
+    END Perfil*/
 FROM pasajero;

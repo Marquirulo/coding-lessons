@@ -10,7 +10,7 @@ WHERE l_cod_continente IS NOT NULL;
 
 /**EJ11**/
 SELECT p_nombre, p_apellido,
-    CASE p_perfil
+    CASE UPPER(p_perfil)
         WHEN 'BUSINESS CLASS' THEN 'PLATINO'
         WHEN 'PRIMERA_CLASE' THEN 'ORO'
         ELSE 'BRONCE'
@@ -19,7 +19,7 @@ FROM pasajero;
 
 /**EJ12**/
 SELECT l_nombre,
-    CASE l_descripcion
+    CASE UPPER(l_descripcion)
         WHEN 'Hemisferio Norte' THEN 'NORTE'
         WHEN 'Hemisferio Sur' THEN 'SUR'
     END UBICACION
@@ -31,19 +31,9 @@ SELECT p_nombre||' '||p_apellido Nombre, DECODE(UPPER(p_perfil), 'LOW_COST', 'TU
 FROM pasajero;
 
 /**EJ14**/
-SELECT p_nombre||' '||p_apellido Nombre, DECODE(UPPER(p_perfil), NULL, 'SIN_PERFIL', p_perfil) Perfil
-    /*CASE 
-        WHEN p_perfil IS NULL THEN 'SIN_PERFIL'
-        ELSE p_perfil
-    END Perfil*/
+SELECT p_nombre||' '||p_apellido Nombre, NVL(p_perfil, 'SIN_PERFIL') Perfil
 FROM pasajero;
 
 /**EJ15**/
-SELECT p_nombre||' '||p_apellido Nombre, 
-    DECODE(p_perfil, NULL, 'SIN_PERFIL', 'LOW_COST','TURISTA' , p_perfil) Perfil
-    /*CASE 
-        WHEN p_perfil IS NULL THEN 'SIN_PERFIL'
-        WHEN p_perfil = 'LOW_COST' THEN 'TURISTA'
-        ELSE p_perfil
-    END Perfil*/
+SELECT p_nombre||' '||p_apellido Nombre, DECODE(UPPER(p_perfil), NULL, 'SIN_PERFIL', 'LOW_COST','TURISTA' , p_perfil) Perfil
 FROM pasajero;

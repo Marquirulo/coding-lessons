@@ -1,3 +1,62 @@
+/*1*/
+SELECT e.*, d.loc
+    FROM emple e, depart d
+WHERE e.dept_no = d.dept_no
+    AND UPPER(d.loc) IN ('MADRID', 'BARCELONA');
+
+/*2*/
+SELECT e.apellido, e.oficio, e.emp_no, d.dnombre, d.loc
+    FROM emple e, depart d
+WHERE e.dept_no = d.dept_no;    
+
+/*3*/
+SELECT e.apellido, e.oficio, d.loc
+    FROM emple e, depart d
+WHERE e.dept_no = d.dept_no
+    AND UPPER(e.oficio) = 'ANALISTA';
+
+/*4*/
+SELECT al.apenom, notas.nota
+    FROM alumnos al, notas
+WHERE al.dni = notas.dni
+    AND UPPER(al.pobla) = 'MADRID'
+    AND notas.nota < 5;
+
+/*5*/
+SELECT p.p_nombre||' '||p.p_apellido NOMBRE
+    FROM lugar l, pasajero p
+WHERE p.pais_residencia = l.l_codigo
+    AND UPPER(l.l_nombre) = 'AUSTRALIA';
+
+/*6*/
+SELECT al.apenom, ag.nombre, notas.nota
+    FROM alumnos al, asignaturas ag, notas
+WHERE al.dni = notas.dni
+    AND ag.cod = notas.cod;
+
+/*7*/
+SELECT al.apenom, ag.nombre
+    FROM alumnos al, asignaturas ag, notas
+WHERE al.dni = notas.dni
+    AND ag.cod = notas.cod
+    AND UPPER(ag.nombre) = 'FOL';
+
+/*8*/
+SELECT al.apenom, ag.nombre
+    FROM alumnos al, asignaturas ag, notas
+WHERE al.dni = notas.dni
+    AND ag.cod = notas.cod
+    AND UPPER(ag.nombre) LIKE '%O%O%'
+    AND UPPER(al.pobla) = 'MADRID';
+    
+/*9*/
+SELECT al.apenom, ag.nombre
+    FROM alumnos al, asignaturas ag, notas
+WHERE al.dni = notas.dni
+    AND ag.cod = notas.cod
+    AND notas.nota BETWEEN 7 AND 8
+    AND UPPER(ag.nombre) = 'FOL';
+-----------------------------------------------------------------------
 /**EJ10**/
 SELECT l_nombre,
     CASE 

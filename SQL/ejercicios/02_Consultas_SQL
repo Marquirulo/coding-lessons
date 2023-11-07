@@ -30,6 +30,7 @@ WHERE l_cod_continente IS NOT NULL;
 SELECT p_nombre||' '||p_apellido Nombre, DECODE(UPPER(p_perfil), 'LOW_COST', 'TURISTA', p_perfil) Perfil
 FROM pasajero;
 
+/**EJ14**/
 SELECT p_nombre||' '||p_apellido Nombre, DECODE(UPPER(p_perfil), NULL, 'SIN_PERFIL', p_perfil) Perfil
     /*CASE 
         WHEN p_perfil IS NULL THEN 'SIN_PERFIL'

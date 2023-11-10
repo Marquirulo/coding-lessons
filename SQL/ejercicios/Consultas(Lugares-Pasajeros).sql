@@ -140,5 +140,18 @@ ORDER BY l_total_habitantes DESC;
 --***** EJ31 *****
 --***** EJ32 *****
 --***** EJ33 *****
+SELECT p.l_nombre, c.l_nombre, p.l_total_habitantes
+    FROM lugar p, lugar c
+WHERE p.l_cod_continente = c.l_codigo
+    and p.l_cod_continente NOT IN (10, 20)
+order by p.l_nombre, p.l_total_habitantes;
+
 --***** EJ34 *****
+SELECT p.p_nombre, p.p_apellido
+    FROM lugar l, pasajero p
+WHERE p.pais_residencia = l.l_codigo
+    AND UPPER(p.p_apellido) = 'RUIZ'
+    AND UPPER(l.l_nombre) <> 'FIYI'
+ORDER BY p.p_perfil, p.p_nombre;
+
 --***** EJ35 *****

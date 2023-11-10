@@ -81,3 +81,8 @@ DECODE(cotizacion,
   3, salario*0.96,
   salario*0.2) -- El ELSE se pone al final en valor único
 FROM empleados;
+
+/*** AGRUPACIONES ***/
+MAX(salario)
+MIN(salario)
+AVG(salario)

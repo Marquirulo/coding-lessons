@@ -15,15 +15,15 @@ where e.manager_id = j.employee_id;
 
 /*** LEFT Y RIGHT JOIN (Todos los valores de la X tabla relacionandolos con la Y 
                                                 y si no tienen relación pone NULL) ***/
-/*El (+) indica cual es la tabla que se va a agregar (Y), es decir la que podrá dar NULL*/
--- LEFT JOIN -- 
-SELECT e.apellido, d.dept_no, d.dnombre
-    FROM emple e, depart d
-WHERE e.dept_no = d.dept_no(+);
+    /*El (+) indica cual es la tabla que se va a agregar (Y), es decir la que podrá dar NULL*/
+    -- LEFT JOIN -- 
+    SELECT e.apellido, d.dept_no, d.dnombre
+        FROM emple e, depart d
+    WHERE e.dept_no = d.dept_no(+);
 
--- RIGHT JOIN --
-SELECT e.apellido, d.dept_no, d.dnombre
-    FROM emple e, depart d
-WHERE e.dept_no(+) = d.dept_no;
+    -- RIGHT JOIN --
+    SELECT e.apellido, d.dept_no, d.dnombre
+        FROM emple e, depart d
+    WHERE e.dept_no(+) = d.dept_no;
 
 /*** SUBCONSULTAS ***/

@@ -143,8 +143,8 @@ ORDER BY l_total_habitantes DESC;
 SELECT p.l_nombre, c.l_nombre, p.l_total_habitantes
     FROM lugar p, lugar c
 WHERE p.l_cod_continente = c.l_codigo
-    and p.l_cod_continente NOT IN (10, 20)
-order by p.l_nombre, p.l_total_habitantes;
+    AND p.l_cod_continente NOT IN (10, 20)
+ORDER BY p.l_nombre, p.l_total_habitantes;
 
 --***** EJ34 *****
 SELECT p.p_nombre, p.p_apellido

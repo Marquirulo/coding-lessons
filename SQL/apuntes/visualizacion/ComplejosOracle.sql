@@ -27,3 +27,33 @@ where e.manager_id = j.employee_id;
     WHERE e.dept_no(+) = d.dept_no;
 
 /*** SUBCONSULTAS ***/
+        /* Permite usar el resultado de una consulta en otra en WHEN, HAVING, FROM y JOIN
+        Pueden devolver un único valor (columna) y debe ser del mismo tipo que la comparacion usan los operadores logicos o IN
+        También pueden devolver varias, pero enonces habria que usar ANY, SOME, ALL, IN, NOT IN */
+    -- IN --
+    SELECT apellido
+        FROM emple
+    WHERE oficio IN(SELECT DISTINCT oficio
+                       FROM emple
+                    WHERE dept_no = 20);
+
+    -- ALL --
+    SELECT *
+        FROM emple
+    WHERE salario < ALL (SELECT salario
+                            FROM emple
+                         WHERE dept_no = 30);
+
+    -- ANY --
+    SELECT *
+        FROM emple
+    WHERE salario = ANY (SELECT salario
+                            FROM emple
+                         WHERE dept_no = 30);
+
+        /*Si quiero poder coger varias columnas*/
+    SELECT *
+        FROM emple
+    WHERE (oficio, salario) IN (SELECT oficio, salario
+                                    FROM emple
+                                WHERE dept_no = 30);

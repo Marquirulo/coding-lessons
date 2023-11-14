@@ -57,3 +57,10 @@ where e.manager_id = j.employee_id;
     WHERE (oficio, salario) IN (SELECT oficio, salario
                                     FROM emple
                                 WHERE dept_no = 30);
+
+/****************************** JOINS EN SUBCONSULTAS **********************************/
+SELECT apellido, dept_no, salario
+    FROM emple e
+WHERE salario IN (SELECT MAX(salario)
+                        FROM emple em
+                    WHERE em.dept_no = e.dept_no) --> Esta línea provoca un efecto de "foreach" entre la subconsulta y la consulta

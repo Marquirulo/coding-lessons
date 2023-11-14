@@ -86,3 +86,4 @@ FROM empleados;
 MAX(salario)
 MIN(salario)
 AVG(salario)
+COUNT(salario) --> Cuenta el nº de registros

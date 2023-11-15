@@ -63,4 +63,6 @@ SELECT apellido, dept_no, salario
     FROM emple e
 WHERE salario IN (SELECT MAX(salario)
                         FROM emple em
-                    WHERE em.dept_no = e.dept_no) --> Esta línea provoca un efecto de "foreach" entre la subconsulta y la consulta
+                  WHERE em.dept_no = e.dept_no) --> Esta línea provoca un efecto de "foreach" entre la subconsulta y la consulta
+
+/*** AGRUPACIONES ***/

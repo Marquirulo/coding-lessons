@@ -111,8 +111,8 @@ SELECT pr.nombre
     FROM detalle_pedido d, producto pr
 WHERE d.codigo_producto = pr.codigo_producto
     AND pr.cantidad_en_stock = (SELECT cantidad_en_stock
-                            FROM producto
-                      WHERE UPPER(codigo_producto) = 'OR-134');
+                                    FROM producto
+                                WHERE UPPER(codigo_producto) = 'OR-134');
                     
 /*EJ19*/
 SELECT *

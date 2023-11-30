@@ -1,16 +1,26 @@
+-- VER TODAS LAS TABLAS DE MI BBDD --
+SELECT * 
+FROM sys.tables;
+
 -- CREAR UNA TABLA NUEVA, INDICAR LOS DISTINTOS CAMPOS QUE LA COMPONEN Y EL TIPO DE DATOS A ALMACENAR EN CADA UNO --
 CREATE TABLE empleados (
     id INTEGER,
     nombre TEXT,
     edad INTEGER
 );
-
+/*
+TIPOS DE DATOS
+NUMBER(precision, escala)    -> Numérico
+CHAR(longitud)    -> Alfanumerico de longitud fija (Si tengo 10 y almaceno 5 rellena los otros 5)
+VARCHAR2(longitud_max) -> Alfanumerico de longitud variable
+DATE    -> Fecha
+*/
 
 -- AÑADIR REGISTROS A LA TABLA INDICANDO EL VALOR DE CADA CAMPO --
 INSERT INTO empleados (id, nombre, edad)
 VALUES (1, 'Julio Perez', 31);
 
-
+--***** CONSULTAS *****--
 -- VER VALORES DE LOS CAMPOS DE UNA TABLA --
 SELECT nombre, edad -- Selecciono solo los campos que quiero ver
 FROM empleados;     -- Indico la tabla que quiero ver los campos
@@ -51,12 +61,12 @@ CREATE TABLE empleados (
    id INTEGER PRIMARY KEY,                  -- Indica el campo como PK
    nombre TEXT UNIQUE,                      -- Indica que ese campo no puede tener dos valores iguales
    inicio_contrato TEXT NOT NULL,           -- Indica que el campo no puede ser NULL
-   fin_contrato TEXT DEFAULT 'No Aplica'    -- Indica el valor que cojera si el campo está vacío
+   fin_contrato TEXT DEFAULT 'No Aplica'    -- Indica el valor que cojerá si el campo está vacío
 );
 
 
 -- VISUALIZAR LAS QUERIES "AMIGABLEMENTE"--
-SELECT nombre AS 'Nombre' -- Al mostrar la query modifica el nombre del campo por el indicado entre comillas ''
+SELECT nombre AS Nombre -- Al mostrar la query modifica el nombre del campo por el indicado entre comillas ''
 FROM empleados;
 
 SELECT DISTINCT herramientas -- Muestra los valores que toma ese campo (sin duplicados)

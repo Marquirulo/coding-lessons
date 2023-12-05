@@ -85,5 +85,6 @@ FROM empleados;
 /*** AGRUPACIONES ***/
 MAX(salario)
 MIN(salario)
+SUM(salario)
 AVG(salario)
 COUNT(salario) --> Cuenta el nº de registros (Si pongo el nombre de columna no cuenta los NULL)

@@ -66,3 +66,16 @@ WHERE salario IN (SELECT MAX(salario)
                   WHERE em.dept_no = e.dept_no) --> Esta línea provoca un efecto de "foreach" entre la subconsulta y la consulta
 
 /*** AGRUPACIONES ***/
+    /*Permite hacer más facil las subconsultas anteriores*/
+SELECT estante, tema, SUM(libros)
+    FROM libreria
+GROUP BY estante, tema --> Permite indicar sobre que valores se tienen que agrupar la funcion agrupada
+ORDER BY estante;
+
+
+/*** Si quiero aplicar filtros a las agrupaciones ***/
+SELECT estante, tema, SUM(libros)
+    FROM libreria
+GROUP BY estante, tema --> Permite indicar sobre que valores se tienen que agrupar la funcion agrupada
+HAVING SUM(libros) > 30
+ORDER BY estante;

@@ -69,3 +69,46 @@ WHERE UPPER(tema) LIKE '%E%';
 SELECT *
     FROM libros
 ORDER BY LENGTH(titulo);
+
+/*Ej17*/
+SELECT dept_no, COUNT(1)
+    FROM emple
+GROUP BY dept_no;
+
+/*Ej18*/
+SELECT dept_no, COUNT(1)
+    FROM emple
+GROUP BY dept_no
+HAVING COUNT(1) > 4;
+
+/*Ej19*/
+SELECT dept_no, oficio, COUNT(1)
+    FROM emple
+GROUP BY dept_no, oficio
+HAVING COUNT(1) > 2;
+
+/*Ej20*/
+SELECT estante, COUNT(tema)
+    FROM libreria
+GROUP BY estante
+HAVING COUNT(tema) = 3;
+
+/*Ej21*/
+SELECT SYSDATE
+    FROM dual;
+
+/*Ej22*/
+SELECT EXTRACT(month FROM fecha_alt)
+    FROM emple;
+
+/*Ej23*/
+SELECT 'Hoy es' || ' ' || SYSDATE HOY
+    FROM DUAL;
+
+/*Ej24*/
+SELECT TO_DATE('01012022','DD/MM/YYYY')
+    FROM DUAL;
+    
+/*Ej25*/
+SELECT EXTRACT(day FROM TO_DATE('01012022','DD/MM/YYYY'))
+    FROM DUAL;

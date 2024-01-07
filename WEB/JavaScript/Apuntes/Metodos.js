@@ -1,6 +1,7 @@
 /**** IDENTIFICACION DE ELEMENTOS ****/
+  //document = Documento HTML
   document.getElementById('idDemo');
-  document.getElementByTagName('p'); //Selecciona etiquetas HTML
+  document.getElementByTagName('div'); //Selecciona etiquetas HTML
   document.getElementByName('nombre') ;
   document.getElementByClassName('colores');
 
@@ -10,3 +11,14 @@
   element.src = 'fondo.png'; //Modifica un atributo
   element.setAttribute(placeholder, "Ingrese sus datos: "); //Añade un atributo y su valor
   element.style.color = green; // Cambia el style (css)
+
+/**** AÑADIR Y QUITAR ELEMENTOS ****/
+//Añadir
+  element.createElement('div')
+  element.createTextNode("Añade texto")
+  element.appendChild('p') //Añade un <p> al final del document
+  element.insertBefore('p', 'div') //Añade un <p> antes de un <dicv>
+//Eliminar
+  element.removeChild('p') 
+//Sustituir
+  element.replaceChild('p')

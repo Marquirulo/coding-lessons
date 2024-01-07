@@ -1,0 +1,4 @@
+//Funciones
+  function miFuncion(){
+
+  }

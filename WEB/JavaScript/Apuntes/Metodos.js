@@ -11,6 +11,7 @@
   element.src = 'fondo.png'; //Modifica un atributo
   element.setAttribute(placeholder, "Ingrese sus datos: "); //Añade un atributo y su valor
   element.style.color = green; // Cambia el style (css)
+  document.write();
 
 /**** AÑADIR Y QUITAR ELEMENTOS ****/
 //Añadir

@@ -64,5 +64,23 @@ GROUP BY e.nombre
     HAVING SUM(d.cantidad) > 100;
     
 /*EJ3*/
-SELECT *
-    FROM ;
+SELECT c.nombre_cliente, COUNT(p.codigo_cliente)
+    FROM cliente c, pedido p
+WHERE c.codigo_cliente = p.codigo_cliente
+    AND UPPER(p.estado) = 'ENTREGADO'
+GROUP BY c.nombre_cliente
+HAVING COUNT(p.codigo_pedido) < (SELECT COUNT(p2.codigo_pedido)
+                                    FROM pedido p2
+                                WHERE p2.codigo_cliente = 7);
+
+/*EJ4*/
+/*EJ5*/
+SELECT o.ciudad, COUNT(1)
+    FROM empleado e, oficina o
+WHERE e.codigo_oficina = o.codigo_oficina
+    AND UPPER(e.puesto) = 'REPRESENTANTE VENTAS'
+GROUP BY o.ciudad
+    HAVING COUNT(1) < (SELECT COUNT(1)
+                            FROM empleado e, oficina o
+                        WHERE e.codigo_oficina = o.codigo_oficina
+                            AND UPPER(o.codigo_oficina) = 'TAL-ES');

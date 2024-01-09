@@ -92,6 +92,6 @@ WHERE e.codigo_oficina = o.codigo_oficina
     AND UPPER(e.puesto) = 'REPRESENTANTE VENTAS'
 GROUP BY o.ciudad
     HAVING COUNT(e.codigo_empleado) < (SELECT COUNT(e.codigo_empleado)
-                            FROM empleado e, oficina o
-                        WHERE e.codigo_oficina = o.codigo_oficina
-                            AND UPPER(o.codigo_oficina) = 'TAL-ES');
+                                            FROM empleado e, oficina o
+                                       WHERE e.codigo_oficina = o.codigo_oficina
+                                            AND UPPER(o.codigo_oficina) = 'TAL-ES');

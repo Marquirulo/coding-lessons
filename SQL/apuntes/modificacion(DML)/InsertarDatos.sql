@@ -13,15 +13,15 @@
 
 /**** INSERT CON SELECT****/
   /*Se pueden usar sentencias SELECT para insertar*/
-  INSERT INTO dept_30
+  INSERT INTO emples_dept_30
     SELECT employee_id, last_name, salary
       FROM employees
     WHERE department_id = 30;
 
 /**** INSERT MIXTO ****/
-  /*Se pueden mezclar las anteriores indicando en el select como literales los valores que quiero insertar directamente y con el nombre de la columna los que quierp recoger de la consulta*/
+  /*Se pueden mezclar las anteriores indicando en el select como literales los valores que quiero insertar directamente y con el nombre de la columna los que quiero recoger de la consulta*/
     INSERT INTO JOBS
-      SELECT 'REP', 'Repartidor', min_salary, max_salary
+      SELECT 'REP', 'Repartidor', min_salary, max_salary --Los dos primeros campos se añaden mediante un INSERT normal y los dos segundos con el resultado del SELECT.
         FROM jobs
       WHERE job_id = 'SA_MAN';
 

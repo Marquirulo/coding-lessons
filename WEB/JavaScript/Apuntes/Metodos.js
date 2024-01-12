@@ -4,6 +4,8 @@
   document.getElementByTagName('div'); //Selecciona etiquetas HTML
   document.getElementByName('nombre') ;
   document.getElementByClassName('colores');
+  element.lastChild
+  element.firstChild
 
 /**** CAMBIAR CONTENIDO DE LOS ELEMENTOS ****/
   //element = elemento seleccionado

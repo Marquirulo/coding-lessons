@@ -2,14 +2,14 @@
 /*Para que la inserción sea correcta los valores deben estar en orden y coincidir en el tipo*/
 
 /**** CONFIRMAR/REVOCAR LAS MODIFICACIONES ****/
-  COMMIT;
+  COMMIT; --Hasta que no ejecuto el commit, el resto de usuarios no verán los cambios.
   ROLLBACK;
 
 /**** INSERT ****/
   /*Añadir registros completos*/
     INSERT INTO JOBS VALUES ('REP', 'REPRESENTANTE', '1800')
   /*Añadir valores sueltos de registros, si no se indica ningun valor se rellen el valor DF o NULL*/
-    INSERT INTO JOBS (JOB_ID, JOB_TITTLE) VALUES ('REP', 'REPRESENTANTE')
+    INSERT INTO JOBS (JOB_ID, JOB_TITLE) VALUES ('REP', 'REPRESENTANTE')
 
 /**** INSERT CON SELECT****/
   /*Se pueden usar sentencias SELECT para insertar*/

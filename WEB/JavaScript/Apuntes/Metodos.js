@@ -20,7 +20,8 @@
   element.createElement('div')
   element.createTextNode("Añade texto")
   element.appendChild('p') //Añade un <p> al final del document
-  element.insertBefore('p', 'div') //Añade un <p> antes de un <dicv>
+  element.insertBefore('p', 'div') //Añade un <p> antes de un <div>
+  element.addEventListener('onclick', function(event){}); //event ~ this
 //Eliminar
   element.removeChild('p') 
 //Sustituir

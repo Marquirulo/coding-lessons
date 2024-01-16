@@ -22,6 +22,8 @@
   element.appendChild('p') //Añade un <p> al final del document
   element.insertBefore('p', 'div') //Añade un <p> antes de un <div>
   element.addEventListener('onclick', function(event){}); //event ~ this
+event.target.tagName // para ubucar un elemento por el nombre de la etiqueta
+
 //Eliminar
   element.removeChild('p') 
 //Sustituir

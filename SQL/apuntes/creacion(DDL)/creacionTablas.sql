@@ -38,3 +38,21 @@
                            COD_PROVINCIA  NUMBER(2),
                            EXPEDIENTE     VARCHAR2(30)  UNIQUE,
                            FECHA_CARGA    DATE          DEFAULT SYSDATE);
+/**** RESTRICCIONES ****/
+-- tabla_columna_restriccion Ej. emp_cod_pk
+/* RESTRICCION */
+  /* PK */
+    --SIMPLE
+    CREATE TABLE clientes( dni VARCHAR(9),
+                                   nombre VARCHAR(50)
+                                   CONSTRAINT clientes_pk PRIMARY KEY(dni));
+
+    --COMPUESTA
+    CREATE TABLE alquileres(dni VARCHAR(9),
+                                    cod_pelicula NUMBER(5),
+                                    CONSTRAINT alquileres_pk PRIMARY KEY(dni,cod_pelicula));
+
+  /* FK */
+  /* UK */    
+  /* NN */
+  /* CK */

@@ -41,7 +41,7 @@
 /**** RESTRICCIONES ****/
 -- tabla_columna_restriccion Ej. emp_cod_pk
 /* RESTRICCION */
-  /* PK */
+  /* PK (Primary Key) */
     --SIMPLE
     CREATE TABLE clientes( dni VARCHAR(9),
                                    nombre VARCHAR(50)
@@ -52,7 +52,28 @@
                                     cod_pelicula NUMBER(5),
                                     CONSTRAINT alquileres_pk PRIMARY KEY(dni,cod_pelicula));
 
-  /* FK */
-  /* UK */    
-  /* NN */
-  /* CK */
+  /* FK (Foreign Key) */
+    CREATE TABLE existencias(
+        tipo VARCHAR2(2),
+        modelo NUMBER(3),
+        n_almacen NUMBER(1),
+        cantidad NUMBER(7),
+        CONSTRAINT existencias_fk1 FOREIGN KEY(tipo,modelo) REFERENCES piezas,
+        CONSTRAINT existencias_fk2 FOREIGN KEY(n_almacen) REFERENCES almacenes,
+        CONSTRAINT existencias_pk PRIMARY KEY(tipo,modelo,n_almacen));
+
+  /* CK (Check) */ --> Aplica condiciones a los datos de los campos 
+    CREATE TABLE existencias(
+        tipo VARCHAR2(2),
+        modelo NUMBER(3),
+        n_almacen NUMBER(1),
+        cantidad NUMBER(7),
+        CONSTRAINT existencias_fk1 FOREIGN KEY(tipo,modelo) REFERENCES piezas,
+        CONSTRAINT existencias_fk2 FOREIGN KEY(n_almacen) REFERENCES almacenes,
+        CONSTRAINT existencias_ck1 CHECK (tipo in ('A','B')),
+        CONSTRAINT existencias_ck2 CHECK (cantidad between 1 and 5000),
+        CONSTRAINT existencias_pk PRIMARY KEY(tipo,modelo,n_almacen));
+
+  /* UK (Unique) */
+
+  /* NN (Not Null) */

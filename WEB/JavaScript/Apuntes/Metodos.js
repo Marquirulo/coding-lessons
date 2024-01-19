@@ -7,6 +7,8 @@
   element.lastChild
   element.firstChild
   element.innerHTML // Corresponde al texto entre dos etiquetas HTML
+  element.children // Recoge todos los hijos del elemento
+
 /**** CAMBIAR CONTENIDO DE LOS ELEMENTOS ****/
   //element = elemento seleccionado
   element.innerHTML + ' tenemos agua'; //Añade el texto tras el + 

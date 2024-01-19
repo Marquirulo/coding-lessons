@@ -8,9 +8,9 @@ Texto de anchura fija | CHAR(n)
 Texto de anchura variable | VARCHAR2(n)
 
             NÚMEROS
-  Enteros posición decimal | NUMBER(n)
+  Enteros posición decimal | NUMBER(n): n es el máx de dígitos
   Decimal de coma variable | NUMBER
-  Decimal de coma fija | NUMBER(m,d)
+  Decimal de coma fija | NUMBER(p,s): p es la precisión máxima del número y s es la escala (número de decimales a la derecha de la coma)
 
             FECHAS
 Fechas | DATE

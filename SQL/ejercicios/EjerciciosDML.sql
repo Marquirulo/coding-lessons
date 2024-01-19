@@ -64,30 +64,146 @@ WHERE dept_no in (SELECT dept_no
                                    GROUP BY dept_no));
                                    
 /*Ej13*/
+UPDATE emple
+    SET salario = (SELECT 2*salario
+                    FROM emple
+                    WHERE emp_no = 7369),
+        apellido = LOWER(apellido)
+WHERE dept_no = (SELECT dept_no
+                    FROM depart
+                WHERE UPPER(depart.dnombre) = 'CONTABILIDAD');
+
 /*Ej14*/
+DELETE FROM centros
+WHERE cod_centro = 50;
+
 /*Ej15*/
+DELETE FROM centros;
+
 /*Ej16*/
+DELETE FROM libreria lib
+WHERE ejemplares <= (SELECT AVG(ejemplares)
+                        FROM libreria
+                    WHERE lib.estante = libreria.estante);
+
 /*Ej17*/
+DELETE FROM depart
+WHERE dept_no IN (SELECT dept_no
+                    FROM emple
+                  GROUP BY dept_no
+                  HAVING COUNT(emp_no) < 4);
+                  
 /*Ej18*/
+INSERT INTO coches VALUES ('Ferrari');
+INSERT INTO coches VALUES ('Renault');
+
 /*Ej19*/
+UPDATE coches
+    SET nombre = 'SEAT IBIZA'
+WHERE UPPER(nombre) = 'SEAT';
+
 /*Ej20*/
+INSERT INTO alum   
+SELECT distinct * 
+    FROM nuevos
+WHERE nuevos.nombre NOT IN (SELECT alum.nombre FROM alum);
+
 /*Ej21*/
-/*Ej22*/
+DELETE FROM alum
+WHERE nombre IN (SELECT nombre FROM antiguos);
+
+/*Ej22 OjO*/
+INSERT INTO EMPLE (emp_no, apellido, fecha_alt, salario, oficio, dir, comision, dept_no)
+SELECT 200, 'SAAVEDRA', SYSDATE, salario+salario*0.2, oficio, dir, comision, dept_no
+     FROM emple
+WHERE emp_no = 7521;
+
 /*Ej23*/
+UPDATE emple
+    SET dept_no = (SELECT MIN(dept_no)
+                            FROM emple
+                          WHERE UPPER(oficio) = 'VENDEDOR'
+                          GROUP BY dept_no
+                          HAVING COUNT(1) = (SELECT MAX(COUNT(1))
+                                                FROM emple
+                                            WHERE UPPER(oficio) = 'VENDEDOR'
+                                            GROUP BY dept_no))
+WHERE UPPER(apellido) = 'SAAVEDRA';                    
+
+
 /*Ej24*/
+DELETE FROM depart
+    WHERE dept_no NOT IN (SELECT e.dept_no
+                            FROM depart d, emple e
+                         WHERE d.dept_no IN e.dept_no
+                         GROUP BY e.dept_no);                    
+
 /*Ej25*/
+UPDATE centros
+    SET num_plazas = num_plazas/2
+WHERE cod_centro IN (SELECT cod_centro
+                        FROM profesores
+                    GROUP BY cod_centro
+                    HAVING COUNT(1) < 2);
+
 /*Ej26*/
-/*Ej27*/
+DELETE centros
+WHERE cod_centro IN (SELECT cod_centro
+                        FROM personal
+                    GROUP BY cod_centro
+                    HAVING COUNT(1) = 0);
+/*Ej27 NO SE HACE*/
 /*Ej28*/
+DELETE personal
+WHERE cod_centro IN (SELECT cod_centro
+                        FROM profesores
+                    GROUP BY cod_centro
+                    HAVING COUNT(1) < 2)
+    AND cod_centro IN (SELECT cod_centro
+                        FROM centros
+                       WHERE num_plazas < 300);
 /*Ej29*/
+DELETE FROM profesores
+    WHERE dni NOT IN (SELECT dni 
+                        FROM personal
+                      WHERE funcion = 'PROFESOR');
+
 /*Ej30*/
-/*Ej31*/ 
-/*Ej32*/ 
-/*Ej33*/ 
-/*Ej34*/ 
-/*Ej35*/ 
-/*Ej36*/ 
-/*Ej37*/ 
-/*Ej38*/ 
-/*Ej39*/ 
-/*Ej40*/
+INSERT INTO articulos VALUES('Chocolate', (SELECT cod_fabricante
+                                                FROM fabricantes
+                                            WHERE pais = 'FRANCIA'), 0, 'Primera', 0, 0, 5);
+
+/*Ej31*/
+INSERT INTO pedidos
+    SELECT '1111-A', articulo, cod_fabricante, peso, categoria, sysdate, 20
+        FROM ventas
+    WHERE articulo = (SELECT articulo
+                            FROM ventas
+                      GROUP BY articulo
+                      HAVING SUM(unidades_vendidas) = (SELECT MAX(SUM(unidades_vendidas))
+                                                         FROM ventas
+                                                       GROUP BY articulo));
+
+/*Ej32*/
+INSERT INTO pedidos
+SELECT '2222-A', articulo, cod_fabricante, peso, categoria, TO_DATE('01/02/2021'), 10
+    FROM articulos
+WHERE existencias > 200
+    AND cod_fabricante = (SELECT cod_fabricante
+                            FROM fabricantes
+                          WHERE UPPER(pais) = 'FRANCIA');
+
+/*Ej33*/
+UPDATE articulos
+    SET precio_venta = precio_venta * 1.03
+WHERE cod_fabricante IN (SELECT cod_fabricante
+                            FROM fabricantes
+                          WHERE UPPER(pais) = 'ESPAÑA');
+
+/*Ej34*/
+DELETE FROM pedidos
+    WHERE fecha_pedido < TO_DATE('1/1/2023')
+        AND cod_fabricante IN (SELECT cod_fabricante
+                            FROM fabricantes
+                          WHERE UPPER(pais) = 'BELGICA');
+

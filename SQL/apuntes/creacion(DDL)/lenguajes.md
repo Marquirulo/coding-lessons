@@ -3,8 +3,8 @@ DDL () -> Define los objetos (metadatos) -> NO permiten COMMIT y ROLLBACK
 DML () -> Gestionar y manipular datos -> Permiten COMMIT y ROLLBACK
 
 # TIPOS DE DATOS
-| Descripcion | Tipo | Otros |
-| --------- | --------- | --------- |
+| Descripcion | Tipo |
+| --------- | --------- |
 |TEXTO|
 |Texto de anchura fija | CHAR(n)|
 |Texto de anchura variable | VARCHAR2(n)|

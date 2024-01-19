@@ -22,3 +22,8 @@ Texto largo | CLOB
 
           ESPECIALES
 Referencia a fila | ROWID -> Identifica cada registro
+
+/**** TABLAS DICCIONARIOS ****/
+          ALL_TABLES
+        ALL_TAB_COLUMNS
+        ALL_CONSTRAINTS

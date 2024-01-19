@@ -13,26 +13,26 @@
                            COD_PROVINCIA  NUMBER(2),
                            EXPEDIENTE     VARCHAR2(30),
                            FECHA_CARGA    DATE);
-  --IDENTIFICAR PK--
+  /* PK */
     CREATE TABLE EMPLEADO (DNI             VARCHAR2(9)  PRIMARY KEY,
                            EDAD            NUMBER,
                            COD_PROVINCIA   NUMBER(2),
                            EXPEDIENTE      VARCHAR2(30),
                            FECHA_CARGA     DATE);
-  --NOT NULL--
+  /* NOT NULL */
     CREATE TABLE EMPLEADO (DNI            VARCHAR2(9)   PRIMARY KEY,
                            EDAD           NUMBER        NOT NULL,
                            COD_PROVINCIA  NUMBER(2),
                            EXPEDIENTE     VARCHAR2(30),
                            FECHA_CARGA    DATE);
-  --UNIQUE--
+  /* UNIQUE */
     CREATE TABLE EMPLEADO (DNI            VARCHAR2(9)   PRIMARY KEY,
                            EDAD           NUMBER        NOT NULL,
                            COD_PROVINCIA  NUMBER(2),
                            EXPEDIENTE     VARCHAR2(30)  UNIQUE,
                            FECHA_CARGA    DATE);
 
-  --DEFAULT--
+  /* DEFAULT */
     CREATE TABLE EMPLEADO (DNI            VARCHAR2(9)   PRIMARY KEY,
                            EDAD           NUMBER        NOT NULL,
                            COD_PROVINCIA  NUMBER(2),

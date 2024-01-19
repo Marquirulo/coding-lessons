@@ -2,7 +2,7 @@ DCL (Data Control Language) -> Define permisos de acceso a distintos objetos de 
 DDL () -> Define los objetos (metadatos) -> NO permiten COMMIT y ROLLBACK
 DML () -> Gestionar y manipular datos -> Permiten COMMIT y ROLLBACK
 
-/**** TIPOS DE DATOS ****/
+*TIPOS DE DATOS*
               TEXTO
 Texto de anchura fija | CHAR(n)
 Texto de anchura variable | VARCHAR2(n)
@@ -23,7 +23,7 @@ Texto largo | CLOB
           ESPECIALES
 Referencia a fila | ROWID -> Identifica cada registro
 
-* TABLAS DICCIONARIOS *
+*TABLAS DICCIONARIOS*
           ALL_TABLES
         ALL_TAB_COLUMNS
         ALL_CONSTRAINTS

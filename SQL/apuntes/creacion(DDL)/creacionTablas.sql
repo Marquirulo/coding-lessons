@@ -74,6 +74,6 @@
         CONSTRAINT existencias_ck2 CHECK (cantidad between 1 and 5000),
         CONSTRAINT existencias_pk PRIMARY KEY(tipo,modelo,n_almacen));
 
-  /* UK (Unique) */
-
-  /* NN (Not Null) */
+/**** CREACION DE TABLAS IDENTICAS ****/
+ /*Esto copia la estructura y los registros pero no las restricciones (pk,fk...). Esto habrá qeu añadirlo una vez creada.*/
+   CREATE TABLE tabla_nueva AS SELECT * FROM tabla_antigua;

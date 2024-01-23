@@ -1,0 +1,2 @@
+/**** DROP ****/
+  DROP TABLE provincias;

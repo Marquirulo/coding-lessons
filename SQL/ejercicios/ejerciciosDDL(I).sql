@@ -61,12 +61,12 @@ CREATE TABLE ejer8 AS SELECT dni iden, nombre usua, edad anos, fecha hoy FROM ej
 /*EJ9*/
 CREATE TABLE emple_depart AS
     SELECT e.apellido, d.dnombre
-    FROM emple e
+        FROM emple e
     JOIN depart d USING (dept_no);
 
 /*EJ10*/
 CREATE TABLE dept_ventas AS
     SELECT e.apellido, d.dnombre, sysdate fecha_alta
-    FROM emple e
+        FROM emple e
     JOIN depart d USING (dept_no)
     WHERE UPPER(d.dnombre) = 'VENTAS';

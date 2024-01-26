@@ -16,3 +16,18 @@
           ALTER TABLE EJEMPLO MODIFY PROV NOT NULL;
     /*○ Fijamos un valor por defecto y ponemos NOT NULL en la misma sentencia:*/
           ALTER TABLE EJEMPLO ADD PROV VARCHAR2(20) DEFAULT ‘Madrid’ NOT NULL;
+  /*MODIFY*/
+    ALTER TABLE alum MODIFY nombre VARCHAR2(25);
+  /*DROP*/
+    ALTER TABLE empleado DROP (sexo, edad);
+  /*ADD CONSTRAINT*/
+    ALTER TABLE prueba ADD CONSTRAINT col1_pk PRIMARY KEY (col1);
+  /*DROP CONSTRAINT*/
+
+  /*RENAME*/
+    ALTER TABLE EMPRE RENAME COLUMN COD_EMPRE TO CD_EMPRE;  -- Renombrar columna
+    ALTER TABLE EMPRE RENAME TO EMPRE2; -- Renombrar tabla
+    ALTER TABLE EMPRE RENAME CONSTRAINT EMPRE_FK1 TO EMPRE_FK2; -- Renombrar restricciones
+  /*ENABLE / DISBLE*/
+    ALTER TABLE tabla DISABLE CONSTRAINT nombre [CASCADE];
+    ALTER TABLE tabla ENABLE CONSTRAINT nombre;

@@ -9,3 +9,7 @@ ON DELETE CASCADE
 /**** DELETE ****/
   DELETE FROM jobs
   WHERE name = 'Himuro'; -- El WHERE puede utilizar subconsultas
+
+/**** TRUNCATE ****/
+  /*Elimina todos los registros de la tabla*/
+  TRUNCATE TABLE jobs;

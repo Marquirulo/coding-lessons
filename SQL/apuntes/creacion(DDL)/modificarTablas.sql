@@ -22,6 +22,7 @@
 
   /*DROP*/
     ALTER TABLE empleado DROP (sexo, edad);
+    ALTER TABLE empleado DROP (id_empleado) CASCADE CONSTRAINTS; -- Esto es para borrar columnas PK que son FK en otras
 
   /*ADD CONSTRAINT*/
     ALTER TABLE prueba ADD CONSTRAINT col1_pk PRIMARY KEY (col1);

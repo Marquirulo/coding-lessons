@@ -1,3 +1,5 @@
+/**** CONSOLA ****/
+console.log();
 /**** VARIABLES ******/
   var edad = 20; //Podemos crear variables con valor,
   var dia, mes, calle; //O crear varias variables sin valor en una misma linea

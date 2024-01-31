@@ -1,3 +1,4 @@
+/*1*/
 CREATE TABLE fabricantes(
     COD_FABRICANTE NUMBER(3) NOT NULL PRIMARY KEY,
     NOMBRE VARCHAR2 (15),
@@ -63,3 +64,69 @@ CREATE TABLE VENTAS(
     CONSTRAINT ventas_ck1 CHECK (unidades_vendidas > 0),
     CONSTRAINT ventas_ck2 CHECK (categoria IN ('primera', 'segunda', 'tercera'))
 );
+
+SELECT * FROM all_constraints WHERE TABLE_NAME = 'TIENDAS';
+
+/*Ej2*/
+ALTER TABLE tiendas 
+    ADD CONSTRAINT tiendas_ck2 CHECK (nombre = LOWER(nombre));
+    
+/*Ej3*/
+ALTER TABLE pedidos
+    MODIFY unidades_pedidas NUMBER(6);
+
+ALTER TABLE ventas
+    MODIFY unidades_vendidas NUMBER(6);
+    
+/*Ej4*/
+ALTER TABLE tiendas
+    ADD CONSTRAINT tiendas_ck3 CHECK (provincia != 'TOLEDO');
+    
+/*Ej5*/
+ALTER TABLE pedidos
+    ADD pvp NUMBER(4);
+ALTER TABLE ventas
+    ADD pvp NUMBER(4);
+    
+/*Ej6*/
+ALTER TABLE tiendas
+    MODIFY nombre VARCHAR2(100);
+    
+/*Ej7*/
+CREATE TABLE piezas (
+    cod_pieza NUMBER(5) PRIMARY KEY,
+    nombre VARCHAR2(30),
+    pieza_aux NUMBER(5),
+    peso NUMBER(5,2) NOT NULL,
+    CONSTRAINT piezas_fk FOREIGN KEY (pieza_aux) REFERENCES piezas
+);
+
+/*ej8*/
+INSERT INTO piezas (cod_pieza, nombre, peso) VALUES (82540,'rodillo',32.4);
+
+/*Ej9*/
+INSERT INTO piezas VALUES (34501, 'rueda', 82540, 40);
+
+/*Ej10*/
+INSERT INTO piezas VALUES (65497, 'remolque', 54761, 90);   --  Da error de integridad
+
+/*Ej11*/
+ALTER TABLE profesores 
+    ADD cod_asig NUMBER(2);
+    
+/*Ej12*/
+CREATE TABLE tasig (
+    cod_asig NUMBER(2),
+    nom_asig VARCHAR2(20)
+);
+
+/*Ej13*/
+ALTER TABLE tasig
+    ADD CONSTRAINT tasig_pk PRIMARY KEY (cod_asig);
+    
+/*Ej14*/
+ALTER TABLE profesores
+    ADD CONSTRAINT cod_asig FOREIGN KEY (cod_asig) REFERENCES tasig;
+
+/*Ej15*/
+DROP TABLE tasig CASCADE CONSTRAINTS;

@@ -53,6 +53,10 @@ CREATE TABLE estudios (
     CONSTRAINT estudios_fk2 FOREIGN KEY (universidad) REFERENCES universidades,
     CONSTRAINT estudios_ck CHECK (año > 2000)
 );
+INSERT INTO estudios VALUES (98563247,34856,2020,'ASIR','Informática');
+INSERT INTO estudios VALUES (45632791,95124,2005,'Contabilidad','Comercio');
+INSERT INTO estudios VALUES (12335794,95124,2016,'ADE','Empresariales');
+INSERT INTO estudios VALUES (34569218,58746,2023,'Marketing','Publicidad');
 
 CREATE TABLE trabajos(
     dept_no         NUMBER(5)       PRIMARY KEY,
@@ -61,6 +65,10 @@ CREATE TABLE trabajos(
     salario_max     NUMBER(9)       NOT NULL,
     CONSTRAINT trabajos_ck CHECK (salario_min BETWEEN 15000 AND 25000)
 );
+INSERT INTO trabajos VALUES (00001,'Analista de Seguridad',25000,8000);
+INSERT INTO trabajos VALUES (00002,'Contable',17000,30000);
+INSERT INTO trabajos VALUES (00003,'Direccion',23000,50000);
+INSERT INTO trabajos VALUES (00004,'Publicitario',15000,4000);
 
 CREATE TABLE departamentos(
     dept_no         NUMBER(5)       PRIMARY KEY,

@@ -1,4 +1,4 @@
-/*Creación de Tablas e Insercion de Datos*/
+/*Creación de Tabla e Inserción de Registros*/
 CREATE TABLE empleados (
     dni         NUMBER(8)       PRIMARY KEY,
     nombre      VARCHAR2(10)    NOT NULL,
@@ -10,26 +10,40 @@ CREATE TABLE empleados (
     provincia   VARCHAR2(10),
     cod_postal  NUMBER(5),
     sexo        VARCHAR2(3),
-    fecha_nac   DATE
+    fecha_nac   DATE,
+    CONSTRAINT empleados_ck CHECK (sexo IN ('H','M','N/A'))
 );
+INSERT INTO empleados VALUES (98563247, 'Marcos','Berrocal','Solis','','','Fuenlabrada','Madrid',28943,'H','03/03/2005');
+INSERT INTO empleados VALUES (45632791, 'María','García','Ballesteros','','','Móstoles','Madrid',27145,'M','01/08/1994');
+INSERT INTO empleados VALUES (12335794, 'Julia','Sánchez','Del Bosque','Paseo del Álamo, 3','','Ávila','Ávila',84569,'M','25/02/1980');
+INSERT INTO empleados VALUES (34569218, 'Iris','Pérez','Texeira','','','Barcelona','Barcelona',87596,'N/A','13/10/1969');
 
-CREATE TABLE HISTORIAL_SALARIAL (
+CREATE TABLE historial_salarial (
     empleado_dni    NUMBER(8)   PRIMARY KEY,
     salario         NUMBER(9)   NOT NULL,
     fecha_comienzo  DATE,
     fecha_fin       DATE,
     CONSTRAINT hist_sal_fk FOREIGN KEY (empleado_dni) REFERENCES empleados
 );
+INSERT INTO historial_salarial VALUES (98563247,57000,'21/11/2023','');
+INSERT INTO historial_salarial VALUES (45632791,13459,'06/09/2004','26/02/2019');
+INSERT INTO historial_salarial VALUES (12335794,23485,'18/04/2017','');
+INSERT INTO historial_salarial VALUES (34569218,9568,'3/01/2024','03/02/2024');
 
-CREATE TABLE UNIVERSIDADES(
+CREATE TABLE universidades(
     univ_cod        NUMBER(5)   PRIMARY KEY,
     nombre_univ     VARCHAR(25) NOT NULL,
     ciudad          VARCHAR2(20),
     municipio       VARCHAR2(20),
     cod_postal      NUMBER(5)
 );
+INSERT INTO universidades VALUES (58746, 'Nebrija', 'Madrid', 'Móstoles', 28936);
+INSERT INTO universidades VALUES (62345, 'UIC', 'Barcelona', 'Barcelona', 24932);
+INSERT INTO universidades VALUES (95124, 'IE University', 'Segovia', 'Segovia', 29853);
+INSERT INTO universidades VALUES (34856, 'Rey Juan Carlos I', 'Madrid', 'Fuenlabrada', 28944);
 
-CREATE TABLE ESTUDIOS (
+
+CREATE TABLE estudios (
     empleado_dni    NUMBER(8)    PRIMARY KEY,
     universidad     NUMBER(5)    NOT NULL,
     año             NUMBER(4),
@@ -40,7 +54,7 @@ CREATE TABLE ESTUDIOS (
     CONSTRAINT estudios_ck CHECK (año > 2000)
 );
 
-CREATE TABLE TRABAJOS(
+CREATE TABLE trabajos(
     dept_no         NUMBER(5)       PRIMARY KEY,
     nombre_trab     VARCHAR2(20)    NOT NULL,
     salario_min     NUMBER(9)       NOT NULL,
@@ -48,7 +62,7 @@ CREATE TABLE TRABAJOS(
     CONSTRAINT trabajos_ck CHECK (salario_min BETWEEN 15000 AND 25000)
 );
 
-CREATE TABLE DEPARTAMENTOS(
+CREATE TABLE departamentos(
     dept_no         NUMBER(5)       PRIMARY KEY,
     nombre_dpto     VARCHAR2(30)    NOT NULL,
     dpto_padre      NUMBER(5),
@@ -57,7 +71,7 @@ CREATE TABLE DEPARTAMENTOS(
     CONSTRAINT departamentos_fk FOREIGN KEY (dpto_padre) REFERENCES departamentos
 );
 
-CREATE TABLE HISTORIAL_LABORAL(
+CREATE TABLE historial_laboral(
     empleado_dni    NUMBER(8)   PRIMARY KEY,
     trabajo_cod     NUMBER(5),
     fecha_inicio    DATE,
@@ -70,7 +84,7 @@ CREATE TABLE HISTORIAL_LABORAL(
     CONSTRAINT hist_laboral_fk4 FOREIGN KEY (supervisor_dni) REFERENCES empleados
 );
 
-CREATE TABLE CATEGORIAS(
+CREATE TABLE Categorias(
     cod_categoria   VARCHAR2(5) PRIMARY KEY,
     categoria       VARCHAR2(15)
 );

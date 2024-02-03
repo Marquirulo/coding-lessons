@@ -1,4 +1,4 @@
-/*Parte1*/
+/*Creación de Tablas e Insercion de Datos*/
 CREATE TABLE empleados (
     dni         NUMBER(8)       PRIMARY KEY,
     nombre      VARCHAR2(10)    NOT NULL,
@@ -74,5 +74,7 @@ CREATE TABLE CATEGORIAS(
     cod_categoria   VARCHAR2(5) PRIMARY KEY,
     categoria       VARCHAR2(15)
 );
-
-SELECT * FROM HISTORIAL_LABORAL;
+INSERT INTO categorias VALUES ('B', 'Becario');
+INSERT INTO categorias VALUES ('J', 'Junior');
+INSERT INTO categorias VALUES ('S', 'Senior');
+INSERT INTO categorias VALUES ('M', 'Manager');

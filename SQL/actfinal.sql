@@ -59,7 +59,7 @@ INSERT INTO estudios VALUES (12335794,95124,2016,'ADE','Empresariales');
 INSERT INTO estudios VALUES (34569218,58746,2023,'Marketing','Publicidad');
 
 CREATE TABLE trabajos(
-    dept_no         NUMBER(5)       PRIMARY KEY,
+    trabajo_cod         NUMBER(5)       PRIMARY KEY,
     nombre_trab     VARCHAR2(20)    NOT NULL,
     salario_min     NUMBER(9)       NOT NULL,
     salario_max     NUMBER(9)       NOT NULL,

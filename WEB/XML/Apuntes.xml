@@ -15,3 +15,21 @@
         <pais continente="África">Egipto</pais>
     </ciudad>
 </ciudades>
+
+<!--Para caracteres especiales usar &-->
+<!-- < = &lt; > = &gt; & = &amp; ' = &apos; " = &quot -->
+
+<!-- Para marcar texto que no sea procesado usamos CDATA -->
+<![CDATA[
+En HTML la negrita se escribe: <strong>
+]]>
+
+<!-- Para utilizar en un mismo fichero dos objetos con un mismo nombre usamos namespace -->
+<e1:fusion xmlns:e1="ejemplo1"
+           xmlns:e2="ejemplo2">
+
+<!-- Elementos vacios así -->
+    <br></br>
+    <br/>
+
+<-- Usar " no ' -->

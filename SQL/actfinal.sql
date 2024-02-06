@@ -13,10 +13,10 @@ CREATE TABLE empleados (
     fecha_nac   DATE,
     CONSTRAINT empleados_ck CHECK (sexo IN ('H','M','N/A'))
 );
-INSERT INTO empleados VALUES (98563247, 'Marcos','Berrocal','Solis','','','Fuenlabrada','Madrid',28943,'H','03/03/2005');
-INSERT INTO empleados VALUES (45632791, 'María','García','Ballesteros','','','Móstoles','Madrid',27145,'M','01/08/1994');
-INSERT INTO empleados VALUES (12335794, 'Julia','Sánchez','Del Bosque','Paseo del Álamo, 3','','Ávila','Ávila',84569,'M','25/02/1980');
-INSERT INTO empleados VALUES (34569218, 'Iris','Pérez','Texeira','','','Barcelona','Barcelona',87596,'N/A','13/10/1969');
+INSERT INTO empleados VALUES (98563247, 'Marcos','Berrocal','Solis','d1','d11','Fuenlabrada','Madrid',28943,'H','03/03/2005');
+INSERT INTO empleados VALUES (45632791, 'María','García','Ballesteros','d2','d22','Móstoles','Madrid',27145,'M','01/08/1994');
+INSERT INTO empleados VALUES (12335794, 'Julia','Sánchez','Del Bosque','Paseo del Álamo, 3','d33','Ávila','Ávila',84569,'M','25/02/1980');
+INSERT INTO empleados VALUES (34569218, 'Iris','Pérez','Texeira','d4','d44','Barcelona','Barcelona',87596,'N/A','13/10/1969');
 
 CREATE TABLE historial_salarial (
     empleado_dni    NUMBER(8)   PRIMARY KEY,

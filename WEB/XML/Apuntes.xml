@@ -27,9 +27,9 @@ En HTML la negrita se escribe: <strong>
 <!-- Para utilizar en un mismo fichero dos objetos con un mismo nombre usamos namespace -->
 <e1:fusion xmlns:e1="ejemplo1"
            xmlns:e2="ejemplo2">
-
+<e1:carta></e1:carta>
+<e2:carta></e2:carta>
+    
 <!-- Elementos vacios así -->
     <br></br>
     <br/>
-
-<-- Usar " no ' -->

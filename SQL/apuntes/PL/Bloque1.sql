@@ -1,3 +1,4 @@
+-- Solo DML
 /* Tipos de datos:
      Escalares: Nº, Caracteres, Fechas...
      Compuestos: Colecciones y registros
@@ -25,11 +26,16 @@ eliminado BOOLEAN DEFAULT FALSE; -- Inicializar una variable con un falor por de
           n_dept depart.cod_dept%TYPE;
      /* %ROWTYPE */
           
-/**** BLOQUE ****/
-     DECLARE IS / AS
+/**** BLOQUE DE LOS PROCEDIMIENTOS ****/
+ /* BLOQUE ANÓNIMO */
+     DECLARE [IS | AS] -- OPCIONAL
           [declaraciones] -- Definimos todos los objetos
      BEGIN
           [instrucciones] -- Conteiene las sentencias ejecutables de PL/SQL
-     EXCEPTION
+     EXCEPTION -- OPCIONAL
           [tratamiento de excepciones] -- Tratamiento de errores (Como en Python)
      END;
+
+/**** SALIDA POR PANTALLA ****/
+     SET SERVEROUTPUT ON; -- Activa la salida por pantalla
+     DBMS_OUTPUT.PUT_LINE('Hola ' || nombre);

@@ -1,5 +1,5 @@
 /********* BORRADO PREVIO DE LAS TABLAS *********/
---Borro todas las tablas que voy a crear para evitar errores en caso de que ya existan unas con el mismo nombre, además incluyo el CASCADE CONSTRAINTS para evitar problemas de borrado por integridad referencial
+--Borro todas las tablas que voy a crear para evitar errores en caso de que ya existan unas con el mismo nombre, además incluyo el CASCADE CONSTRAINTS para evitar problemas en el borrado por integridad referencial.
 DROP TABLE empleados CASCADE CONSTRAINTS;
 DROP TABLE historial_salarial CASCADE CONSTRAINTS;
 DROP TABLE universidades CASCADE CONSTRAINTS;
@@ -168,12 +168,12 @@ ALTER TABLE trabajos MODIFY nombre_trab UNIQUE; -- Modifico la tabla trabajos pa
 ALTER TABLE departamentos MODIFY nombre_dpto UNIQUE; -- Modifico la tabla departamentos para que no pueda haber dos con el mismo nombre
 /*Ej 2,3,4*/
 ALTER TABLE empleados -- Realizo todas la modificaciones de empleados en una sola ejecución
-    ADD valoracion NUMBER(2) -- Añado un campo valoración de tipo numérico, con p 2 ya que el máx número que se podrá poner es el 10.
-    ADD CONSTRAINT empleados_ck2 CHECK (valoracion BETWEEN 1 AND 10)
-    MODIFY nombre NULL
-    ADD cod_categoria VARCHAR2(5);
+    ADD valoracion NUMBER(2) -- Añado un campo valoración de tipo numérico, con precisión 2 ya que el máx número que se podrá poner es el 10.
+    ADD CONSTRAINT empleados_ck2 CHECK (valoracion BETWEEN 1 AND 10) -- Añado la restricción para que solo pueda tomar valores entre 1 y 10
+    MODIFY nombre NULL -- Modifico el campo nombre para que permita los valores nulos
+    ADD cod_categoria VARCHAR2(5); -- Añado el campo cod_categoría
 /*Ej 5*/
-UPDATE empleados 
+UPDATE empleados -- En una ejecución asigno un valor al campo cod_categoria a los 4 registros de empleados (2 Manager y 2 Senior)
     SET cod_categoria = CASE dni
                             WHEN 98563247 THEN 'M'
                             WHEN 45632791 THEN 'S'

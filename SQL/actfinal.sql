@@ -100,7 +100,7 @@ INSERT INTO historial_laboral VALUES (45632791, 00002, '05/05/2023', NULL, 00003
 INSERT INTO historial_laboral VALUES (12335794, 00003, '26/02/2014', NULL, 00001, NULL);
 INSERT INTO historial_laboral VALUES (34569218, 00004, '04/12/2008', '19/11/2022', 0002, 45632791);
 
-CREATE TABLE Categorias(
+CREATE TABLE categorias(
     cod_categoria   VARCHAR2(5) PRIMARY KEY,
     categoria       VARCHAR2(15)
 );

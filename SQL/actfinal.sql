@@ -78,6 +78,10 @@ CREATE TABLE departamentos(
     pres_actual     NUMBER(9),
     CONSTRAINT departamentos_fk FOREIGN KEY (dpto_padre) REFERENCES departamentos
 );
+INSERT INTO departamentos VALUES (00001, 'Direccion', NULL, 15236984, 10000247);
+INSERT INTO departamentos VALUES (00002, 'Finanzas', 00001, 78956, 645812);
+INSERT INTO departamentos VALUES (00003, 'Contabilidad', 00002, 325698, 302568);
+INSERT INTO departamentos VALUES (00004, 'IT', 00001, 123548, 96253);
 
 CREATE TABLE historial_laboral(
     empleado_dni    NUMBER(8)   PRIMARY KEY,
@@ -91,6 +95,10 @@ CREATE TABLE historial_laboral(
     CONSTRAINT hist_laboral_fk3 FOREIGN KEY (dept_cod) REFERENCES trabajos,
     CONSTRAINT hist_laboral_fk4 FOREIGN KEY (supervisor_dni) REFERENCES empleados
 );
+INSERT INTO historial_laboral VALUES (98563247, 00001, '05/05/2020', NULL, 00004, 12335794);
+INSERT INTO historial_laboral VALUES (45632791, 00002, '05/05/2023', NULL, 00003, 12335794);
+INSERT INTO historial_laboral VALUES (12335794, 00003, '26/02/2014', NULL, 00001, NULL);
+INSERT INTO historial_laboral VALUES (34569218, 00004, '04/12/2008', '19/11/2022', 0002, 45632791);
 
 CREATE TABLE Categorias(
     cod_categoria   VARCHAR2(5) PRIMARY KEY,

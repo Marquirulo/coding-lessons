@@ -88,4 +88,48 @@ BEGIN
     DBMS_OUTPUT.PUT_LINE('Se ha facturado un total de '||||'€ a los clientes')
 END;
 /
-select * from clientes;
+
+    /*Ej9*/
+ALTER TABLE clientes 
+    ADD zona varchar2(10)
+;
+/
+DECLARE
+    total_ven NUMBER(15);
+BEGIN
+    UPDATE clientes
+        SET zona = 'CENTRO'
+    WHERE domicilio = 'MADRID';
+    
+    UPDATE clientes
+        SET zona = 'NORTE'
+    WHERE domicilio != 'MADRID';
+    
+    SELECT  SUM(v.unidades*p.precio_uni) INTO total_ven
+    FROM ventascp v, productos p,clientes c
+    WHERE c.nif = v.nif
+        AND p.cod_producto = v.cod_producto
+        AND UPPER(c.zona) = 'CENTRO';
+    
+    DBMS_OUTPUT.PUT_LINE('Se ha facturado un total de '||total_ven||'€ a los clientes');
+END;
+/
+
+/*Ej10*/
+DECLARE
+    cliente clientes.nombre%TYPE;
+    unidades ventascp.unidades%TYPE;
+    product productos.descripcion%TYPE;
+BEGIN
+    INSERT INTO productos VALUES (10, 'Intel 8088', 'Proces', 9000, 0);
+    INSERT INTO ventascp VALUES ('444D', 10, '10/12/97', 4);
+    
+    SELECT p.descripcion, v.unidades, c.nombre INTO product, unidades, cliente
+        FROM ventascp v, productos p,clientes c
+        WHERE c.nif = v.nif
+            AND p.cod_producto = v.cod_producto
+            AND p.cod_producto = 10;
+    
+    DBMS_OUTPUT.PUT_LINE('El cliente ' ||cliente|| ' ha comprado ' ||unidades|| ' unidades del producto' ||product);
+END;
+/

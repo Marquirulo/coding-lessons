@@ -1,3 +1,14 @@
+/*Primero borramos todas las tablas*/
+DROP TABLE empleados CASCADE CONSTRAINTS;
+DROP TABLE historial_salarial CASCADE CONSTRAINTS;
+DROP TABLE universidades CASCADE CONSTRAINTS;
+DROP TABLE estudios CASCADE CONSTRAINTS;
+DROP TABLE trabajos CASCADE CONSTRAINTS;
+DROP TABLE departamentos CASCADE CONSTRAINTS;
+DROP TABLE historial_laboral CASCADE CONSTRAINTS;
+DROP TABLE Categorias CASCADE CONSTRAINTS;
+
+
 /*Creación de Tabla e Inserción de Registros*/
 CREATE TABLE empleados (
     dni         NUMBER(8)       PRIMARY KEY,
@@ -65,7 +76,7 @@ CREATE TABLE trabajos(
     salario_max     NUMBER(9)       NOT NULL,
     CONSTRAINT trabajos_ck CHECK (salario_min BETWEEN 15000 AND 25000)
 );
-INSERT INTO trabajos VALUES (00001,'Analista de Seguridad',25000,8000);
+INSERT INTO trabajos VALUES (00001,'Analista de Red',25000,8000);
 INSERT INTO trabajos VALUES (00002,'Contable',17000,30000);
 INSERT INTO trabajos VALUES (00003,'Direccion',23000,50000);
 INSERT INTO trabajos VALUES (00004,'Publicitario',15000,4000);
@@ -109,4 +120,25 @@ INSERT INTO categorias VALUES ('J', 'Junior');
 INSERT INTO categorias VALUES ('S', 'Senior');
 INSERT INTO categorias VALUES ('M', 'Manager');
 
-/**/
+/*PARTE II*/
+--1)
+ALTER TABLE trabajos MODIFY nombre_trab UNIQUE;
+ALTER TABLE departamentos MODIFY nombre_dpto UNIQUE;
+
+--2,3,4)
+ALTER TABLE empleados 
+    ADD valoracion NUMBER(12)
+    ADD CONSTRAINT empleados_ck2 CHECK (valoracion BETWEEN 1 AND 10)
+    MODIFY nombre NULL
+    ADD cod_categoria VARCHAR2(5);
+
+--5)
+UPDATE empleados SET cod_categoria = 
+    CASE dni
+        WHEN 98563247 THEN 'M'
+        WHEN 45632791 THEN 'S'
+        WHEN 12335794 THEN 'S'
+        WHEN 34569218 THEN 'M'
+        ELSE cod_categoria
+    END
+;

@@ -108,3 +108,5 @@ INSERT INTO categorias VALUES ('B', 'Becario');
 INSERT INTO categorias VALUES ('J', 'Junior');
 INSERT INTO categorias VALUES ('S', 'Senior');
 INSERT INTO categorias VALUES ('M', 'Manager');
+
+/**/

@@ -66,7 +66,7 @@ CREATE TABLE estudios (
 );
 INSERT INTO estudios VALUES (98563247,34856,2020,'ASIR','Informática');
 INSERT INTO estudios VALUES (45632791,95124,2005,'Contabilidad','Comercio');
-INSERT INTO estudios VALUES (12335794,95124,2016,'ADE','Empresariales');
+INSERT INTO estudios VALUES (12335794,62345,2016,'ADE','Empresariales');
 INSERT INTO estudios VALUES (34569218,58746,2023,'Marketing','Publicidad');
 
 CREATE TABLE trabajos(
@@ -121,18 +121,24 @@ INSERT INTO categorias VALUES ('S', 'Senior');
 INSERT INTO categorias VALUES ('M', 'Manager');
 
 /*PARTE II*/
---1)
+/*SELECT * FROM empleados ;
+SELECT * FROM historial_salarial ;
+SELECT * FROM universidades ;
+SELECT * FROM estudios ;
+SELECT * FROM trabajos ;
+SELECT * FROM departamentos ;
+SELECT * FROM historial_laboral ;
+SELECT * FROM Categorias ;*/
+
 ALTER TABLE trabajos MODIFY nombre_trab UNIQUE;
 ALTER TABLE departamentos MODIFY nombre_dpto UNIQUE;
 
---2,3,4)
 ALTER TABLE empleados 
     ADD valoracion NUMBER(12)
     ADD CONSTRAINT empleados_ck2 CHECK (valoracion BETWEEN 1 AND 10)
     MODIFY nombre NULL
-    ADD cod_categoria VARCHAR2(5);
-
---5)
+    ADD cod_categoria VARCHAR2(5)
+;
 UPDATE empleados SET cod_categoria = 
     CASE dni
         WHEN 98563247 THEN 'M'
@@ -142,3 +148,11 @@ UPDATE empleados SET cod_categoria =
         ELSE cod_categoria
     END
 ;
+
+/*PARTE III*/
+UPDATE historial_laboral 
+    SET supervisor_dni = 15849632
+WHERE empleado_dni = 12335794;
+
+DELETE FROM universidades
+    WHERE nombre_univ = 'UIC';

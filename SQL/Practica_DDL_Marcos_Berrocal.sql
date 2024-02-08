@@ -40,7 +40,7 @@ CREATE TABLE historial_salarial (
     salario         NUMBER(9)   NOT NULL,
     fecha_comienzo  DATE,
     fecha_fin       DATE,
-    CONSTRAINT hist_sal_fk FOREIGN KEY (empleado_dni) REFERENCES empleados -- Declaro empleado_dni como FK de empleados
+    CONSTRAINT hist_sal_fk FOREIGN KEY (empleado_dni) REFERENCES empleados -- Declaro empleado_dni como FK de empleados(dni)
 );
 
 -- Añado 4 registros a la tabla

@@ -78,7 +78,8 @@ CREATE TABLE estudios (
     CONSTRAINT estudios_fk  FOREIGN KEY (empleado_dni) REFERENCES empleados, -- Declaro empleado_dni como FK de empleados(dni)
     CONSTRAINT estudios_fk2 FOREIGN KEY (universidad) REFERENCES universidades, -- Declaro universidad como FK de universidades(univ_cod)
     CONSTRAINT estudios_ck CHECK (año > 2000) -- Creo una regla de validación para que el campo año tenga que ser posterior al 2000
-
+);
+    
 -- Añado 4 registros a la tabla
 INSERT INTO estudios VALUES (98563247,34856,2020,'ASIR','Informática');
 INSERT INTO estudios VALUES (45632791,95124,2005,'Contabilidad','Comercio');

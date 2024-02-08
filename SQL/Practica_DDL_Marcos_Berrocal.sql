@@ -23,7 +23,7 @@ CREATE TABLE empleados (
     cod_postal  NUMBER(5),
     sexo        VARCHAR2(3),
     fecha_nac   DATE,
-    CONSTRAINT empleados_ck CHECK (sexo IN ('H','M','N/A'))
+    CONSTRAINT empleados_ck CHECK (sexo IN ('H','M','N/A')) -- Creo una regla de validación para que el campo sexo solo pueda contener los valores 'H','M','N/A'
 );
 
 -- Añado 4 registros a la tabla
@@ -40,7 +40,7 @@ CREATE TABLE historial_salarial (
     salario         NUMBER(9)   NOT NULL,
     fecha_comienzo  DATE,
     fecha_fin       DATE,
-    CONSTRAINT hist_sal_fk FOREIGN KEY (empleado_dni) REFERENCES empleados
+    CONSTRAINT hist_sal_fk FOREIGN KEY (empleado_dni) REFERENCES empleados -- Declaro empleado_dni como FK de empleados
 );
 
 -- Añado 4 registros a la tabla
@@ -75,10 +75,9 @@ CREATE TABLE estudios (
     año             NUMBER(4),
     grado           VARCHAR2(20),
     especialidad    VARCHAR(30),
-    CONSTRAINT estudios_fk  FOREIGN KEY (empleado_dni) REFERENCES empleados,
-    CONSTRAINT estudios_fk2 FOREIGN KEY (universidad) REFERENCES universidades,
-    CONSTRAINT estudios_ck CHECK (año > 2000)
-);
+    CONSTRAINT estudios_fk  FOREIGN KEY (empleado_dni) REFERENCES empleados, -- Declaro empleado_dni como FK de empleados(dni)
+    CONSTRAINT estudios_fk2 FOREIGN KEY (universidad) REFERENCES universidades, -- Declaro universidad como FK de universidades(univ_cod)
+    CONSTRAINT estudios_ck CHECK (año > 2000) -- Creo una regla de validación para que el campo año tenga que ser posterior al 2000
 
 -- Añado 4 registros a la tabla
 INSERT INTO estudios VALUES (98563247,34856,2020,'ASIR','Informática');
@@ -94,7 +93,7 @@ CREATE TABLE trabajos(
     nombre_trab     VARCHAR2(20)    NOT NULL,
     salario_min     NUMBER(9)       NOT NULL,
     salario_max     NUMBER(9)       NOT NULL,
-    CONSTRAINT trabajos_ck CHECK (salario_min BETWEEN 15000 AND 25000)
+    CONSTRAINT trabajos_ck CHECK (salario_min BETWEEN 15000 AND 25000) -- Creo una regla de validación para que el campo salario_min tenga que estar en el rango entre 15000 y 25000
 );
 
 -- Añado 4 registros a la tabla
@@ -113,7 +112,7 @@ CREATE TABLE departamentos(
     dpto_padre      NUMBER(5),
     presupuesto     NUMBER(9)       NOT NULL,
     pres_actual     NUMBER(9),
-    CONSTRAINT departamentos_fk FOREIGN KEY (dpto_padre) REFERENCES departamentos
+    CONSTRAINT departamentos_fk FOREIGN KEY (dpto_padre) REFERENCES departamentos -- Declaro dpto_padre como FK de departamentos(dept_no)
 );
 
 -- Añado 4 registros a la tabla
@@ -132,10 +131,10 @@ CREATE TABLE historial_laboral(
     fecha_fin       DATE,
     dept_cod        NUMBER(5),
     supervisor_dni  NUMBER(8),
-    CONSTRAINT hist_laboral_fk FOREIGN KEY (empleado_dni) REFERENCES empleados,
-    CONSTRAINT hist_laboral_fk2 FOREIGN KEY (trabajo_cod) REFERENCES trabajos,
-    CONSTRAINT hist_laboral_fk3 FOREIGN KEY (dept_cod) REFERENCES trabajos,
-    CONSTRAINT hist_laboral_fk4 FOREIGN KEY (supervisor_dni) REFERENCES empleados
+    CONSTRAINT hist_laboral_fk FOREIGN KEY (empleado_dni) REFERENCES empleados, -- Declaro empleado_dni como FK de empleados(dni)
+    CONSTRAINT hist_laboral_fk2 FOREIGN KEY (trabajo_cod) REFERENCES trabajos, -- Declaro trabajo_cod como FK de trabajos(trabajo_cod)
+    CONSTRAINT hist_laboral_fk3 FOREIGN KEY (dept_cod) REFERENCES departamentos, -- Declaro dept_cod como FK de departamentos(dept_no)
+    CONSTRAINT hist_laboral_fk4 FOREIGN KEY (supervisor_dni) REFERENCES empleados -- Declaro supervisor_dni como FK de empleados(dni)
 );
 
 COMMIT;
@@ -162,17 +161,19 @@ INSERT INTO categorias VALUES ('M', 'Manager');
 
 COMMIT;
 
-/** PARTE II **/
+
+/*********** PARTE II ***********/
 /*Ej 1*/
 ALTER TABLE trabajos MODIFY nombre_trab UNIQUE; -- Modifico la tabla trabajos para que no pueda haber dos con el mismo nombre
 ALTER TABLE departamentos MODIFY nombre_dpto UNIQUE; -- Modifico la tabla departamentos para que no pueda haber dos con el mismo nombre
+
 /*Ej 2,3,4*/
 ALTER TABLE empleados -- Realizo todas la modificaciones de empleados en una sola ejecución
     ADD valoracion NUMBER(2) -- Añado un campo valoración de tipo numérico, con precisión 2 ya que el máx número que se podrá poner es el 10.
     ADD CONSTRAINT empleados_ck2 CHECK (valoracion BETWEEN 1 AND 10) -- Añado la restricción para que solo pueda tomar valores entre 1 y 10
     MODIFY nombre NULL -- Modifico el campo nombre para que permita los valores nulos
     ADD cod_categoria VARCHAR2(5) -- Añado el campo cod_categoría
-    ADD CONSTRAINT empleados_fk FOREIGN KEY (cod_categoria) REFERENCES categorias; -- Además relaciono cod_categoria como FK de la tabla categorias para mantener la integridad referencial.
+    ADD CONSTRAINT empleados_fk FOREIGN KEY (cod_categoria) REFERENCES categorias; -- Declaro cod_categoria como FK de categorias(cod_categoria) para mantener la integridad referencial.
     
 /*Ej 5*/
 UPDATE empleados -- En una ejecución asigno un valor al campo cod_categoria a los 4 registros de empleados (2 Manager y 2 Senior)

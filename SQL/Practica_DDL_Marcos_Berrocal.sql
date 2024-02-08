@@ -171,7 +171,9 @@ ALTER TABLE empleados -- Realizo todas la modificaciones de empleados en una sol
     ADD valoracion NUMBER(2) -- Añado un campo valoración de tipo numérico, con precisión 2 ya que el máx número que se podrá poner es el 10.
     ADD CONSTRAINT empleados_ck2 CHECK (valoracion BETWEEN 1 AND 10) -- Añado la restricción para que solo pueda tomar valores entre 1 y 10
     MODIFY nombre NULL -- Modifico el campo nombre para que permita los valores nulos
-    ADD cod_categoria VARCHAR2(5); -- Añado el campo cod_categoría
+    ADD cod_categoria VARCHAR2(5) -- Añado el campo cod_categoría
+    ADD CONSTRAINT empleados_fk FOREIGN KEY (cod_categoria) REFERENCES categorias; -- Además relaciono cod_categoria como FK de la tabla categorias para mantener la integridad referencial.
+    
 /*Ej 5*/
 UPDATE empleados -- En una ejecución asigno un valor al campo cod_categoria a los 4 registros de empleados (2 Manager y 2 Senior)
     SET cod_categoria = CASE dni

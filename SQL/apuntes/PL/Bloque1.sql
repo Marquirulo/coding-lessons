@@ -62,6 +62,21 @@ eliminado BOOLEAN DEFAULT FALSE; -- Inicializar una variable con un falor por de
      END;
      / -- Esto es una buena práctica para tanto tu como el SQL seais capaces de diferenciar los distintos bloques de procedimientos.
 
+/**** ENTRADA DE DATOS ****/
+     /*Variables de sustitución*/
+     -- Se declaran con & delante. Y fuerza que cada vez que se ejecute &variable_input pregunte por el valor.
+          SET SERVEROUTPUT ON;
+          DECLARE
+               v_first_name VARCHAR2(50);
+               v_last_name VARCHAR2(50);
+          BEGIN
+               SELECT first_name, last_name
+                    INTO v_first_name, v_last_name
+                    FROM hr.employees
+               WHERE employee_id = &employee_input;--& Variable de sustitución.
+               DBMS_OUTPUT.PUT_LINE('Nombre Apellido: ' || v_first_name || ' - ' || v_last_name);
+          END;
+
 /**** SALIDA POR PANTALLA ****/
      SET SERVEROUTPUT ON; -- Activa la salida por pantalla
      DBMS_OUTPUT.PUT_LINE('Hola ' || nombre);

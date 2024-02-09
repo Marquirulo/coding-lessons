@@ -1,16 +1,14 @@
 -- Solo DML
 /* Tipos de datos:
-     Escalares: Nº, Caracteres, Fechas...
      Compuestos: Colecciones y registros
      Referencias: Punteros
      LOB: Localizadores
-*/
-/*
-VARCHAR(n)
-NUMBER(p,e)
-BOOLEAN(TRUE|FALSE|NULL)
-DATE
-TIMESTAMP(p)
+     Escalares: Nº, Caracteres, Fechas...
+          VARCHAR(n)
+          NUMBER(p,e)
+          BOOLEAN(TRUE|FALSE|NULL)
+          DATE
+          TIMESTAMP(p)
 */
 
 /**** VARIABLES ****/

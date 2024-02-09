@@ -1,0 +1,65 @@
+<!--Fichero que se usa para que los archivos XML estén bien formateados y sean válidos.-->
+<!-- Esto sería en el .XML -->
+  <!--Incluir ficheros DTD en los XML (El standalone debe ser NO para los docs dtd externos)-->
+  <!--En el propio XML-->
+      <!DOCTYPE persona [ <!--Obviamente no usarlo-->
+          <!ELEMENT persona (nombre)>
+          <!ELEMENT nombre (#PCDATA)>
+      ]>
+  <!--Documento externo Privado-->
+      <!DOCTYPE raíz SYSTEM "docs.dtd">
+  <!--Documento externo Público-->
+      <!DOCTYPE raíz PUBLIC “docs” http://www.empresa.com/docs.dtd>
+
+<!-- Esto seria en el .DTD -->
+<!-- DEFINIR ELEMENTOS (<!ELEMENT>)-->
+  <!-- 
+       EMPTY
+       ANY
+       elemento concreto
+       secuencias
+       elecciones
+       combinaciones 
+  -->
+  <!-- EMPTY -->
+    <!ELEMENT br EMPTY>
+  <!-- ANY -->
+    <!ELEMENT nuevos_usuarios ANY>
+  <!-- elemento_concreto -->
+    <!ELEMENT listado_discos (disco)> <!-- Fuerzo que solo pueda tener un hijo -->
+    <!ELEMENT telefono (#PCDATA)> <!-- Indico que aquí irá solo texto literal, no más hijos -->
+  <!-- secuencia -->
+    <!ELEMENT sms (telefono,fecha,hora,mensaje)>
+  <!-- elecciones o alternativas -->
+    <!ELEMENT articulo (id | serie)> -- Un OR
+  <!-- combinaciones -->
+    <!ELEMENT aviso (titulo, (parrafo | grafico))> <!-- Se pueden combinar las validaciones anteriores -->
+  <!-- Cardinalidad o Frecuencia -->
+    <!ELEMENT pelicula (titulo, direccion+, argumento?, actor*)>
+      <!--
+        ? Opcional puede aparecer o no (0-1)
+        * Opcional o Repetible (0-n)
+        + Obligatorio o Repetible (1-n)
+      -->
+<!-- DEFINIR ATRIBUTOS (<!ATTLIST>)-->
+  <!ATTLIST nombre_elemento
+        nombre_atributo1 tipo presencia/ valorPorDefecto
+        nombre_atributo2 tipo presencia/ valorPorDefecto ... >
+  <!-- POR DEFECTO CONCRETO -->
+      <!ATTLIST persona nacionalidad CDATA "Española">
+  <!-- FIJOS -->
+      <!ATTLIST persona nacionalidad CDATA #FIXED "Española">
+  <!-- REQUERIDOS -->
+    <!ATTLIST persona nacionalidad CDATA #REQUIRED>
+  <!-- OPCIONAL -->
+    <!ATTLIST persona nacionalidad CDATA #IMPLIED>
+<!-- TIPOS DE ATRIBUTOS -->
+    CDATA
+    ID
+    IDREF
+    IDREFS
+    NMTOKEN
+    NMTOKENS
+    ENTITY
+    ENTITIES
+    

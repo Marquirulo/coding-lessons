@@ -90,6 +90,7 @@ eliminado BOOLEAN DEFAULT FALSE; -- Inicializar una variable con un falor por de
 /**** EXCEPCIONES ****/
 -- Al igual que en otros lenguajes permite controlar los errores
 EXCEPTION
+     /*Para levantar las personalizadas surgen de otros bloques (por ej. en un IF) con RAISE error_perso_1;*/
      WHEN error_perso_1 THEN -- Definida por el usuario
           RAISE_APPLICATION_ERROR([-20001 a -20999],'Mensaje de error personalizado'); -- Creas un error indicado un nº ORA entre 20001 y 20999
      WHEN mirar_tabla_debajo THEN -- Definida por el sistema
@@ -101,13 +102,32 @@ EXCEPTION
           err_msg := SUBSTR(SQLERRM, 1, 200);
           INSERT INTO log_table (error_number, error_message)
           VALUES (err_code, err_msg);
--- Excepciones comunes
-     TOO_MANY_ROWS    -- Se produce cuando SELECT xxx INTO devuelve más de una fila.
-     NO_DATA_FOUND    -- Se produce cuando SELECT xxx INTO no devuelve ninguna fila.
-     LOGIN_DENIED     -- Error cuando intentamos conectarnos a Oracle con un login y clave no validos.
-     NOT_LOGGED_ON    -- Se produce cuando intentamos acceder a la base de datos sin estar conectados.
-     PROGRAM_ERROR    -- Se produce cuando hay un problema interno en la ejecución del programa.
-     VALUE_ERROR      -- Se produce cuando hay un error aritmético o de conversión.
-     ZERO_DIVIDE      -- Se puede cuando hay una división entre 0.
-     DUPVAL_ON_INDEX  -- Se crea cuando se intenta almacenar un valor que crearía duplicados en la clave primaria o en una columna con restricción UNIQUE.
-     INVALID_NUMBER   -- Se produce cuando se intenta convertir una cadena a un valor numérico.
+-- Excepciones comunes (X = USAR)
+    X TOO_MANY_ROWS     -- Se produce cuando SELECT xxx INTO devuelve más de una fila.
+    X NO_DATA_FOUND     -- Se produce cuando SELECT xxx INTO no devuelve ninguna fila.
+      LOGIN_DENIED      -- Error cuando intentamos conectarnos a Oracle con un login y clave no validos.
+      NOT_LOGGED_ON     -- Se produce cuando intentamos acceder a la base de datos sin estar conectados.
+      PROGRAM_ERROR     -- Se produce cuando hay un problema interno en la ejecución del programa.
+    X VALUE_ERROR       -- Se produce cuando hay un error aritmético o de conversión.
+    X ZERO_DIVIDE       -- Se puede cuando hay una división entre 0.
+    X DUP_VAL_ON_INDEX  -- Se crea cuando se intenta almacenar un valor que crearía duplicados en la clave primaria o en una columna con restricción UNIQUE.
+    X INVALID_NUMBER    -- Se produce cuando se intenta convertir una cadena a un valor numérico.
+
+/**** ESTRUCTURAS DE CONTROL ****/
+/*CONDICIONAL*/
+-- En SQL las condiciones pueden ser = a TRUE NULL FALSE (FALSE y NULL son iguales)
+     IF (condicion) THEN
+         ejecuciones;
+     ELSIF (condicion2) AND (condicion2_2) THEN
+         ejecuciones2;
+     ELSE
+         ejecuciones3;
+     END IF;
+-- Se pueden usar CASE al igual que en SELECT
+     CASE [expresion]
+          WHEN condicion1 THEN resultado1;
+          WHEN condicion2 THEN resultado2;
+          ...
+          WHEN condicionN THEN resultadoN;
+     ELSE resultado;
+     END CASE ;

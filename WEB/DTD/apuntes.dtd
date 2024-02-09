@@ -54,12 +54,13 @@
   <!-- OPCIONAL -->
     <!ATTLIST persona nacionalidad CDATA #IMPLIED>
 <!-- TIPOS DE ATRIBUTOS -->
-    CDATA
-    ID
-    IDREF
-    IDREFS
-    NMTOKEN
-    NMTOKENS
-    ENTITY
-    ENTITIES
+    CDATA <!--Cualquier dato-->
+    ID <!-- Son para claves (PK) y requieren un REQUIRED o IMPLIED -->
+    IDREF <!-- Funciona como FK -->
+    IDREFS <!-- Igual que el anterior pero para varias -->
+    NMTOKEN <!-- Igual que CDATA pero solo permite [Az,09,.,-,_,:] -->
+    NMTOKENS <!-- Varios NMTOKEN separados por espacios -->
+    ENTITY <!-- El valor del att será una entidad -->
+    ENTITIES <!-- Varias entidades separadas por espacios -->
+    (hombre | mujer) <!-- Permite indica valores fijos (Como los CHECK) -->
     

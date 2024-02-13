@@ -191,6 +191,7 @@ DECLARE
     v_dept_no emple.dept_no%TYPE;
     v_emp_no emple.emp_no%TYPE;
     v_salario emple.salario%TYPE;
+-- Tengo que crear dos variables para usarlas de validación ya que si uso las del input se quedan convertidas a null y luego no puedo crear los registros. 
     v_emp_no_valida emple.emp_no%TYPE;
     v_dept_no_valida emple.dept_no%TYPE;
 BEGIN

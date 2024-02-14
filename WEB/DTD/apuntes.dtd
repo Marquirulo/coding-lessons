@@ -63,4 +63,13 @@
     ENTITY <!-- El valor del att será una entidad -->
     ENTITIES <!-- Varias entidades separadas por espacios -->
     (hombre | mujer) <!-- Permite indica valores fijos (Como los CHECK) -->
-    
+<!-- ENTIDADES -->
+  <!-- YA EXISTENTES -->
+    &lt; (<)
+    &gt; (>)
+    &amp; (&)
+    &apos; (')
+    &quot; (")
+  <!-- CARACTERES ESPECIALES -->
+    &#000; -> Decimal
+    &#x00; -> Hexadecimañ

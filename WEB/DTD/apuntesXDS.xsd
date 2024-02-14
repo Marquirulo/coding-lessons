@@ -1,13 +1,90 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
-<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"> <!-- Pagina de validacion de esquema -->
-  <xsd:element name="Libro">
-    <xsd:complexType>
-     <xsd:sequence>
-        <xsd:element name="Título" type="xsd:string"/>
-        <xsd:element name="Autor" type="xsd:string" maxOccurs="10"/>
-        <xsd:element name="Editorial" type="xsd:string"/>
-      </xsd:sequence>
-     <xsd:attribute name="precio" type="xsd:double"/>
+<!--Fichero que se usa para que los archivos XML estén bien formateados y sean válidos.-->
+<!-- Esto sería en el .XML -->
+  <!--Incluir ficheros XSD en los XML (El standalone debe ser NO para los docs dtd externos)-->
+  <!--En el propio XML-->
+      <!DOCTYPE persona [ <!--Obviamente no usarlo-->
+          <!ELEMENT persona (nombre)>
+          <!ELEMENT nombre (#PCDATA)>
+      ]>
+  <!--Documento externo Privado-->
+      <!DOCTYPE raíz SYSTEM "docs.dtd">
+  <!--Documento externo Público-->
+      <!DOCTYPE raíz PUBLIC “docs” http://www.empresa.com/docs.dtd>
+
+<!-- Esto seria en el .XSD -->
+  <!--DECLARACION DE ELEMENTOS-->
+    <xsd:element name = "" type="tipoSimple"
+        minOccurs="valor"
+        maxOccurs="valor"
+        fixed=”valor"
+        default=”valor”/>
+    <xsd:element name=”libro”>
+      <xsd:complexType>
+        <xsd:attribute name=”formato” type=”xsd:string” use=”required”/>
+      </xsd:complexType>
+    </xsd:element>
+      
+  <!-- CONTENIDO ELEMENTO -->
+    <xsd:element type = "xsd:_____"/>
+    TEXTO
+      string
+      anyURI
+      NOTATION
+      Qname
+    BINARIOS
+      boolean
+      hexBinary
+      base64Binary
+    NUMEROS
+      decimal
+      float
+      double      
+      positiveInteger
+    FECHAS
+      duration
+      dateTime
+      date
+      time
+      gYearMonth
+      gYear
+      gMonthDay
+      gMonth
+      gDay
+    OTROS
+      sequence
+      choice
+      all
+      
+    <xsd:complexType mixed=”true”> <!-- Permite crear un elemento con varios tipos de datos-->
+      <xsd:sequence>
+        <xsd:element name=”intro” type=”xsd:string”/>
+        <xsd:element name=”nombre” type=”xsd:string”/>
+        <xsd:element name=”fecha” type=”xsd:string”/>
+        <xsd:element name=”titulo” type=”xsd:string”/>
+      <xsd:sequence>
+    
+      <xsd:attribute name="nombreAtributo"
+        type="tipoSimple"
+        use="valor" <!-- required | optional | prohibited (ej para passwords) -->
+        default="valor"
+        fixed="valor"/>
     </xsd:complexType>
-  </xsd:element>
-</xsd:schema>
+<!-- RESTRICCIONES -->
+    <xsd:restriction base ="xsd:type">
+      <xsd:____ value=""/>
+    </xsd:restriction>
+      minInclusive >=
+      minExclusive >
+      maxInclusive <
+      maxExclusive <=
+      totalDigits n enteros
+      fractionDigits n decimales
+      length n caracteres
+      minLength min n caracteres
+      maxLength max n caracteres
+      pattern RegExp
+      enumeration 
+      whiteSpace
+      "preserve"
+      "replace"
+      "collapse"

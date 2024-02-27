@@ -64,6 +64,7 @@ EXCEPTION
         DBMS_OUTPUT.PUT_LINE('Hay un error: ' || SQLERRM);
 END;
 /
+    
 /*Ej4*/
 DECLARE
     n NUMBER(3);
@@ -104,3 +105,20 @@ EXCEPTION
 END;
 /
 
+/*Ej6*/
+DECLARE
+    num NUMBER(3);
+    calc NUMBER(3);
+    cont NUMBER(3) := 0;
+BEGIN
+    num := &num;
+    calc := num;
+    WHILE (MOD(calc,2) = 0) LOOP
+        calc := calc/2;
+        cont := cont+1;
+    END LOOP;
+    DBMS_OUTPUT.PUT_LINE('El numero ' || num || ' es divisible por 2, ' || cont || ' veces');
+EXCEPTION
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('Hay un error: ' || SQLERRM);
+END;

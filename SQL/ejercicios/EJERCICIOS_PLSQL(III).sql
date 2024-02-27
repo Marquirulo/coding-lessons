@@ -79,3 +79,28 @@ EXCEPTION
         DBMS_OUTPUT.PUT_LINE('Hay un error: ' || SQLERRM);
 END;
 /
+
+/*Ej5*/
+DECLARE
+    inicio NUMBER(3);
+    fin NUMBER(3);
+BEGIN
+    inicio := &inicio;
+    fin := &fin;
+    
+    IF (fin >= inicio)THEN
+        FOR i IN REVERSE inicio..fin LOOP
+            IF (MOD(i,3) = 0) THEN
+                DBMS_OUTPUT.PUT_LINE(i || ' es multiplo de 3');
+            END IF;
+        END LOOP;
+    ELSE
+        DBMS_OUTPUT.PUT_LINE('Elija un rango correcto');
+    END IF;
+    
+EXCEPTION
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('Hay un error: ' || SQLERRM);
+END;
+/
+

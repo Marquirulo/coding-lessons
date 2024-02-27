@@ -1,22 +1,19 @@
-SET SERVEROUTPUT ON;
 /*Ej1*/
 DECLARE
     num1 NUMBER(3);
     num2 NUMBER(3);
-    i NUMBER(3);
 BEGIN
-    num1 := &num;
-    num2 := &num;
-    i := num1+1;
-    IF (num1 > num2) THEN
-        WHILE i BETWEEN (num1, num2) LOOP
-            DBMS_OUTPUT.PUT_LINE(i);
-            i := i+1
+    num1 := &num1;
+    num2 := &num2;
+    IF (num1 < num2) THEN
+        WHILE (num1 < num2-1) LOOP
+            num1 := num1+1;
+            DBMS_OUTPUT.PUT_LINE(num1);
         END LOOP;
     ELSE
-        WHILE i BETWEEN (num2, num1) LOOP
-            DBMS_OUTPUT.PUT_LINE(i);
-            i := i+1
+        WHILE (num2 < num1-1) LOOP
+            num2 := num2+1;
+            DBMS_OUTPUT.PUT_LINE(num2);
         END LOOP;
     END IF;
 EXCEPTION
@@ -27,35 +24,56 @@ END;
 
 /*Ej2*/
 DECLARE
-  num NUMBER(4);
+    num NUMBER(4);
 BEGIN
-  IF (MOD(num, 2) = 0) THEN
-    DBMS_OUTPUT.PUT_LINE('El numero ' || num || ' es par');
-  ELSE
-    DBMS_OUTPUT.PUT_LINE('El numero ' || num || ' es impar');
-  END IF;
+    num := &num;
+    IF (MOD(num, 2) = 0) THEN
+        DBMS_OUTPUT.PUT_LINE('El numero ' || num || ' es par');
+    ELSE
+        DBMS_OUTPUT.PUT_LINE('El numero ' || num || ' es impar');
+    END IF;
 EXCEPTION
     WHEN OTHERS THEN
         DBMS_OUTPUT.PUT_LINE('Hay un error: ' || SQLERRM);
 END;
+/
 
 /*Ej3*/
 DECLARE
     num1 NUMBER(3);
     num2 NUMBER(3);
 BEGIN
-    num1 := &num;
-    num2 := &num;
+    num1 := &num1;
+    num2 := &num2;
     
-    IF (num1 > num2) THEN
-        FOR i IN num1..num2 LOOP
-            DBMS_OUTPUT.PUT_LINE(i);
+    IF (num1 < num2) THEN
+        FOR ini IN num1..num2 LOOP
+            IF (MOD(ini,2)=0)THEN
+                DBMS_OUTPUT.PUT_LINE(ini || ' es par');
+            END IF;
         END LOOP;
     ELSE
-        FOR i IN num2..num1 LOOP
-            DBMS_OUTPUT.PUT_LINE(i);
+        FOR ini IN num2..num1 LOOP
+            IF (MOD(ini,2)=0)THEN
+                DBMS_OUTPUT.PUT_LINE(ini || ' es par');
+            END IF;
         END LOOP;
     END IF;
+EXCEPTION
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('Hay un error: ' || SQLERRM);
+END;
+/
+/*Ej4*/
+DECLARE
+    n NUMBER(3);
+BEGIN
+    n := &n;
+    FOR i IN 0..n LOOP
+        IF (MOD(i,2)=0) THEN
+            DBMS_OUTPUT.PUT_LINE(i || ' es par');
+        END IF;
+    END LOOP;
 EXCEPTION
     WHEN OTHERS THEN
         DBMS_OUTPUT.PUT_LINE('Hay un error: ' || SQLERRM);

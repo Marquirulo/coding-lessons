@@ -20,6 +20,9 @@ BEGIN
             DBMS_OUTPUT.PUT_LINE(i);
         END LOOP;
     END IF;
+EXCEPTION
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('Hay un error: ' || SQLERRM);
 END;
 /
 
@@ -32,4 +35,7 @@ BEGIN
   ELSE
     DBMS_OUTPUT.PUT_LINE('El numero ' || num || ' es impar');
   END IF;
+EXCEPTION
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('Hay un error: ' || SQLERRM);
 END;

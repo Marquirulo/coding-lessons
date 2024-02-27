@@ -68,11 +68,13 @@ END;
 /*Ej4*/
 DECLARE
     n NUMBER(3);
+    c NUMBER (3) := 0;
 BEGIN
     n := &n;
-    FOR i IN 0..n LOOP
-        IF (MOD(i,2)=0) THEN
+    FOR i IN 0..999 LOOP
+        IF (MOD(i,2)=0 AND c < n) THEN
             DBMS_OUTPUT.PUT_LINE(i || ' es par');
+            c:=c+1;
         END IF;
     END LOOP;
 EXCEPTION

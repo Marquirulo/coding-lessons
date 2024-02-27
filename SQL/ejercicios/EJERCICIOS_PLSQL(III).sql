@@ -3,21 +3,20 @@ SET SERVEROUTPUT ON;
 DECLARE
     num1 NUMBER(3);
     num2 NUMBER(3);
+    i NUMBER(3);
 BEGIN
     num1 := &num;
     num2 := &num;
-    
+    i := num1+1;
     IF (num1 > num2) THEN
-        num1 := num1+1;
-        num2 := num2+1;
-        FOR i IN num1..num2 LOOP
+        WHILE i BETWEEN (num1, num2) LOOP
             DBMS_OUTPUT.PUT_LINE(i);
+            i := i+1
         END LOOP;
     ELSE
-        num1 := num1+1;
-        num2 := num2+1;
-        FOR i IN num2..num1 LOOP
+        WHILE i BETWEEN (num2, num1) LOOP
             DBMS_OUTPUT.PUT_LINE(i);
+            i := i+1
         END LOOP;
     END IF;
 EXCEPTION
@@ -39,3 +38,26 @@ EXCEPTION
     WHEN OTHERS THEN
         DBMS_OUTPUT.PUT_LINE('Hay un error: ' || SQLERRM);
 END;
+
+/*Ej3*/
+DECLARE
+    num1 NUMBER(3);
+    num2 NUMBER(3);
+BEGIN
+    num1 := &num;
+    num2 := &num;
+    
+    IF (num1 > num2) THEN
+        FOR i IN num1..num2 LOOP
+            DBMS_OUTPUT.PUT_LINE(i);
+        END LOOP;
+    ELSE
+        FOR i IN num2..num1 LOOP
+            DBMS_OUTPUT.PUT_LINE(i);
+        END LOOP;
+    END IF;
+EXCEPTION
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('Hay un error: ' || SQLERRM);
+END;
+/

@@ -82,7 +82,20 @@ EXCEPTION
         DBMS_OUTPUT.PUT_LINE('Hay un error: ' || SQLERRM);
 END;
 /
-
+--OPCION2
+DECLARE
+    num NUMBER(3);
+BEGIN
+    num := &num;
+    FOR i IN 0..num-1 LOOP
+            DBMS_OUTPUT.PUT_LINE(i*2 || ' es par');
+    END LOOP;
+EXCEPTION
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('Hay un error: ' || SQLERRM);
+END;
+/
+    
 /*Ej5*/
 DECLARE
     inicio NUMBER(3);

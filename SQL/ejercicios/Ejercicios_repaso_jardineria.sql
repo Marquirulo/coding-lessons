@@ -13,7 +13,8 @@ INSERT INTO cliente
     
 /*Ej3*/
 INSERT INTO pedido VALUES
-((SELECT MAX(codigo_pedido)+1 FROM pedido), SYSDATE,  SYSDATE+5, SYSDATE+5, 'En proceso', 'Un comentario random', (SELECT MAX(p.codigo_cliente)
+((SELECT MAX(codigo_pedido)+1 
+    FROM pedido), SYSDATE,  SYSDATE+5, SYSDATE+5, 'En proceso', 'Un comentario random', (SELECT MAX(p.codigo_cliente)
                                                                                                                       FROM pedido p, cliente c
                                                                                                                    WHERE p.codigo_cliente = c.codigo_cliente
                                                                                                                       AND c.nombre_cliente = 'GoldFish Garden'));

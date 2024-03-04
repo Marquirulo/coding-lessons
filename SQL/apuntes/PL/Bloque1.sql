@@ -16,10 +16,10 @@
 importe number(8,2); --Inicializar una variable (DF = NULL)
 contador number(2,0) := 0; -- Inicializar una variable con un valor
 nombre char(20) NOT NULL := 'Marcos'; -- Inicializar una variable con un valor y fuerzo que siempre tenga un valor
-eliminado BOOLEAN DEFAULT FALSE; -- Inicializar una variable con un falor por defecto
+eliminado BOOLEAN DEFAULT FALSE; -- Inicializar una variable con un valor por defecto
 
 /**** CURSORES ****/
--- En PL, los resultados de consultas no se muestrasn en pantalla, sino que se almacenan en una area de memoria a parte
+-- En PL, los resultados de consultas no se muestran en pantalla, sino que se almacenan en una area de memoria a parte
 
      /* IMPLICITOS */
      -- Se usan para operaciones SELECT INTO, es decir cuando la consulta devuelve solo un registro
@@ -91,7 +91,7 @@ EXCEPTION
      /*Para levantar las personalizadas surgen de otros bloques (por ej. en un IF) con RAISE error_perso_1;*/
      WHEN error_perso_1 THEN -- Definida por el usuario
           RAISE_APPLICATION_ERROR([-20001 a -20999],'Mensaje de error personalizado'); -- Creas un error indicado un nº ORA entre 20001 y 20999
-     WHEN mirar_tabla_debajo THEN -- Definida por el sistema
+     WHEN excepcio_comun THEN -- Definida por el sistema
           DBMS_OUTPUT.PUT_LINE('SQLCODE: ' || SQLCODE); -- SQLCODE muestra el código que ha fallado
           DBMS_OUTPUT.PUT_LINE('SQLERRM: ' || SQLERRM); -- SQLERRM Devuelve el código de error especifico.
      WHEN OTHERS THEN -- Indicaciones para el resto de errores

@@ -1,5 +1,5 @@
 -- Solo DML
-/* Tipos de datos:
+/** Tipos de datos:
      Compuestos: Colecciones y registros
      Referencias: Punteros
      LOB: Localizadores
@@ -9,7 +9,7 @@
           BOOLEAN(TRUE|FALSE|NULL)
           DATE
           TIMESTAMP(p)
-*/
+**/
 
 /**** VARIABLES ****/
 -- El operador de asinación es :=

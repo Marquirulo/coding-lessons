@@ -36,3 +36,26 @@
       END LOOP;
     END;
     /
+/**** SUBPROGRAMAS ****/
+-- Bloques de PL/SQL con nombre, Compilados una sola vez, Almacenados en la Base de Datos, Gracias al nombre, pueden ser invocados por otras aplicaciones, En el caso de las funciones deben devolver un valor; Adicionalmente pueden(ambos) retornar parámetros de salida. Pueden recibir parámetros.
+
+  /** PROCEDIMIENTOS **/ -- No devuelve nada
+    CREATE {OR REPLACE} PROCEDURE nombre_proc(param1 [IN|OUT|IN OUT] tipo,...)
+    AS
+      -- Declaracion de variables locales
+    BEGIN
+      -- Instrucciones de ejecución
+    EXCEPTION
+      -- Instrucciones de excepción
+    END;
+    /
+  /** FUNCIONES **/ -- Devuelve valor
+    CREATE {OR REPLACE} FUNCTION nombre_func(param1 tipo,...)
+    RETURN tipo_dato AS
+      -- Declaracion de variables locales
+    BEGIN
+      -- Instrucciones de ejecución
+    EXCEPTION
+      -- Instrucciones de excepción
+    END;
+    /

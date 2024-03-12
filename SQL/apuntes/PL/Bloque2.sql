@@ -66,9 +66,15 @@
     /
 
 /**** LLAMADA AL SUBPROGRAMA ****/
-BEGIN
-  nombre_subprograma(param_entrada1, param_entrada2, param_entrada3);
-  nombre_subprogrma2();
-END;
+  BEGIN
+    nombre_subprograma(param_entrada1, param_entrada2, param_entrada3);
+    nombre_subprogrma2();
+    DBMS_OUTPUT.PUT_LINE(nombre_subprogrma3('p1'));
+  END;
 
 /**** PASO DE PARÁMETROS ****/
+  /*Parámetros actuales o reales: Son las variables o expresiones indicadas en la llamada a un subprograma. (Declarados cabecera)
+  Parámetros formales: Son variables declaradas en la especificación del subprograma. (Parámetro)*/
+  -- Los parámetros se ponen como en todos los lenguajes
+  ... FUNCTION usuarios(nombre emple.nombre%TYPE, fecha DATE, cuenta NUMBER) ... -- Declaracion de parametros
+  ... usuarios('Marcos', '03/03/2005', 54869) ... -- Llamada al subprgrama

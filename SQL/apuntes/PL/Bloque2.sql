@@ -38,24 +38,37 @@
     /
 /**** SUBPROGRAMAS ****/
 -- Bloques de PL/SQL con nombre, Compilados una sola vez, Almacenados en la Base de Datos, Gracias al nombre, pueden ser invocados por otras aplicaciones, En el caso de las funciones deben devolver un valor; Adicionalmente pueden(ambos) retornar parámetros de salida. Pueden recibir parámetros.
-
+-- Los tipos de datos en los parámetros sin longitud. Ej VARCHAR2 en vez de VARCHAR2(10).
+-- Terminamos el procedimiento con el nombre para el uso de estas en paquetes (librerias).
+      
   /** PROCEDIMIENTOS **/ -- No devuelve nada
-    CREATE {OR REPLACE} PROCEDURE nombre_proc(param1 [IN|OUT|IN OUT] tipo,...)
+    CREATE [OR REPLACE] PROCEDURE nombre_proc(param1 [IN|OUT|IN OUT] tipo,...)
     AS
       -- Declaracion de variables locales
     BEGIN
       -- Instrucciones de ejecución
     EXCEPTION
       -- Instrucciones de excepción
-    END;
+    END nombre_proc;
     /
-  /** FUNCIONES **/ -- Devuelve valor
+      
+  /** FUNCIONES **/ -- Devuelve valor (No admite parámetros OUT)
     CREATE {OR REPLACE} FUNCTION nombre_func(param1 tipo,...)
     RETURN tipo_dato AS
       -- Declaracion de variables locales
     BEGIN
       -- Instrucciones de ejecución
+        RETURN dato_devolver;
     EXCEPTION
       -- Instrucciones de excepción
-    END;
+        RETURN NULL; -- Para error
+    END nombre_proc;
     /
+
+/**** LLAMADA AL SUBPROGRAMA ****/
+BEGIN
+  nombre_subprograma(param_entrada1, param_entrada2, param_entrada3);
+  nombre_subprogrma2();
+END;
+
+/**** PASO DE PARÁMETROS ****/

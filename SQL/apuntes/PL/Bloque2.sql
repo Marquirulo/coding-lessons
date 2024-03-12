@@ -36,6 +36,7 @@
       END LOOP;
     END;
     /
+---------------------------------------------------------------------------------------
 /**** SUBPROGRAMAS ****/
 -- Bloques de PL/SQL con nombre, Compilados una sola vez, Almacenados en la Base de Datos, Gracias al nombre, pueden ser invocados por otras aplicaciones, En el caso de las funciones deben devolver un valor; Adicionalmente pueden(ambos) retornar parámetros de salida. Pueden recibir parámetros.
 -- Los tipos de datos en los parámetros sin longitud. Ej VARCHAR2 en vez de VARCHAR2(10).

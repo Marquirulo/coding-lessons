@@ -1,0 +1,1 @@
+/**** EXCEPCIONES PROPIAS ****/

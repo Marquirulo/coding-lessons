@@ -213,8 +213,25 @@ BEGIN
     END IF;
     
     
-EXCEPTION
-    WHEN DUP_VAL_ON_INDEX THEN
-        DBMS_OUTPUT.PUT_LINE('Ya existe un departamento con ese nombre');
+--8.2
+CREATE OR REPLACE PROCEDURE borrar_depart(p_dept_num_borrar depart.dept_no%TYPE, p_dept_num_remp depart.dept_no%TYPE)
+AS
+    v_dept_nombre depart.dnombre%TYPE;
+    v_existe NUMBER(2);
+BEGIN
+
+    SELECT COUNT(1) INTO v_existe
+        FROM depart
+    WHERE dept_no = p_dept_num_remp;
+    IF v_existe > 0 THEN
+        UPDATE emple
+            SET dept_no = p_dept_num_remp
+        WHERE dept_no = p_dept_num_borrar;
+
+        DELETE FROM depart
+            WHERE dept_no = p_dept_num_borrar;
+    ELSE
+        DBMS_OUTPUT.PUT_LINE('Este departamento no existe');
+    END IF;
 END;
 /

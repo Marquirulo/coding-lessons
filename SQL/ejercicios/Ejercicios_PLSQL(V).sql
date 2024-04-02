@@ -188,6 +188,7 @@ EXCEPTION
         END IF;
 END;
 /
+    
 --8.1 (Opcion2)
 CREATE OR REPLACE PROCEDURE 
     insert_depart(p_nombre depart.dnombre%TYPE, p_localidad depart.loc%TYPE)
@@ -211,7 +212,8 @@ BEGIN
     ELSE
         RAISE DUP_VAL_ON_INDEX;
     END IF;
-    
+END;
+/
     
 --8.2
 CREATE OR REPLACE PROCEDURE borrar_depart(p_dept_num_borrar depart.dept_no%TYPE, p_dept_num_remp depart.dept_no%TYPE)
@@ -235,6 +237,7 @@ BEGIN
     END IF;
 END;
 /
+    
 --8.3
 CREATE OR REPLACE PROCEDURE modifica_localidad(p_dept_no depart.dept_no%TYPE, p_loc depart.loc%TYPE)
 AS
@@ -244,6 +247,7 @@ BEGIN
     WHERE dept_no = p_dept_no;
 END;
 /
+    
 --8.4
 CREATE OR REPLACE PROCEDURE visualiza_datos_depart(p_dept_num depart.dept_no%TYPE)
 AS

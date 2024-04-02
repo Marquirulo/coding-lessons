@@ -10,7 +10,7 @@ BEGIN
 EXCEPTION
   WHEN OTHERS THEN
     DBMS_OUTPUT.PUT_LINE('Error' || SQLERRM);
-END;
+END ejercicio1;
 /
 
 /*Ej2*/
@@ -35,7 +35,8 @@ EXCEPTION
         DBMS_OUTPUT.PUT_LINE('El producto no existe');
     WHEN OTHERS THEN
         DBMS_OUTPUT.PUT_LINE('Error: '||SQLERRM);
-END;
+        ROLLBACK;
+END ejercicio2;
 /
 
 /*Ej3*/
@@ -56,7 +57,8 @@ BEGIN
 EXCEPTION
     WHEN OTHERS THEN
         DBMS_OUTPUT.PUT_LINE('Error: '||SQLERRM);
-END;
+        ROLLBACK;
+END ejercicio3;
 /
 
 /*Ej4*/
@@ -72,7 +74,7 @@ BEGIN
 EXCEPTION
     WHEN no_data_found THEN
         DBMS_OUTPUT.PUT_LINE('El producto no existe');
-END;
+END ejercicio4;
 /
 
 /*Ej5*/
@@ -251,8 +253,8 @@ END;
 --8.4
 CREATE OR REPLACE PROCEDURE visualiza_datos_depart(p_dept_num depart.dept_no%TYPE)
 AS
-    v_total_emple NUMBER(5);
-    v_dnombre depart.dnombre%TYPE;
+    v_total_emple NUMBER(5);    
+    v_dnombre depart.dnombre%TYPE; 
     v_loc depart.loc%TYPE;
 BEGIN
     SELECT dnombre, loc INTO v_dnombre, v_loc
@@ -264,5 +266,22 @@ BEGIN
     WHERE dept_no = p_dept_num;
     
     DBMS_OUTPUT.PUT_LINE('El departamento con numero ' || p_dept_num || ' es el de ' || v_dnombre || ' está en ' || v_loc || ' y tiene ' || v_total_emple || ' empleados');
+END;
+/
+-- Podemos ahorrar variables sustituyendolas por v_depart%ROWTYPE
+CREATE OR REPLACE PROCEDURE visualiza_datos_depart(p_dept_num depart.dept_no%TYPE)
+AS
+    v_total_emple NUMBER(5);    
+    v_depart depart%ROWTYPE; 
+BEGIN
+    SELECT * INTO v_depart
+        FROM depart
+    WHERE dept_no = p_dept_num;
+    
+    SELECT COUNT(1) INTO v_total_emple
+        FROM emple
+    WHERE dept_no = p_dept_num;
+    
+    DBMS_OUTPUT.PUT_LINE('El departamento con numero ' || v_depart.dept_no || ' es el de ' || v_depart.dnombre || ' está en ' || v_depart.loc || ' y tiene ' || v_total_emple || ' empleados');
 END;
 /

@@ -235,3 +235,30 @@ BEGIN
     END IF;
 END;
 /
+--8.3
+CREATE OR REPLACE PROCEDURE modifica_localidad(p_dept_no depart.dept_no%TYPE, p_loc depart.loc%TYPE)
+AS
+BEGIN
+    UPDATE depart
+        SET loc = UPPER(p_loc)
+    WHERE dept_no = p_dept_no;
+END;
+/
+--8.4
+CREATE OR REPLACE PROCEDURE visualiza_datos_depart(p_dept_num depart.dept_no%TYPE)
+AS
+    v_total_emple NUMBER(5);
+    v_dnombre depart.dnombre%TYPE;
+    v_loc depart.loc%TYPE;
+BEGIN
+    SELECT dnombre, loc INTO v_dnombre, v_loc
+        FROM depart
+    WHERE dept_no = p_dept_num;
+    
+    SELECT COUNT(1) INTO v_total_emple
+        FROM emple
+    WHERE dept_no = p_dept_num;
+    
+    DBMS_OUTPUT.PUT_LINE('El departamento con numero ' || p_dept_num || ' es el de ' || v_dnombre || ' está en ' || v_loc || ' y tiene ' || v_total_emple || ' empleados');
+END;
+/

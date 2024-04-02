@@ -314,3 +314,66 @@ BEGIN
     
 END;
 /
+
+/*Ej10*/
+CREATE OR REPLACE FUNCTION ejercicio10(p_cod_depart depart.dept_no%TYPE, p_emple_max NUMBER, p_emple_min NUMBER)
+RETURN NUMBER AS
+    v_total_emple NUMBER(3);
+    v_emple_afectados NUMBER(3);
+BEGIN
+    
+    SELECT COUNT(1) INTO v_total_emple
+        FROM emple
+    WHERE dept_no = p_cod_depart;
+    
+    IF (v_total_emple BETWEEN p_emple_min AND p_emple_max) THEN
+        DELETE FROM emple
+            WHERE dept_no = p_cod_depart;
+            
+        v_emple_afectados := SQL%ROWCOUNT;
+        DBMS_OUTPUT.PUT_LINE(v_emple_afectados || 'funcion');
+            
+         DELETE FROM depart
+            WHERE dept_no = p_cod_depart; 
+            
+        RETURN v_emple_afectados;
+    ELSE
+        RETURN -1;
+    END IF;
+    
+EXCEPTION
+    WHEN OTHERS THEN
+        ROLLBACK;
+        RETURN -1;
+END ejercicio10;
+/
+
+DECLARE
+    v_cod_depart depart.dept_no%TYPE;
+    v_emple_max NUMBER(3);
+    v_emple_min NUMBER(3);
+    v_resultado_funcion NUMBER(3);
+    v_emples NUMBER(3);
+
+BEGIN
+    v_cod_depart := &dept_no;
+    v_emple_min := &emple_min;
+    v_emple_max := &emple_max;
+    
+    SELECT COUNT(1) INTO v_emples
+        FROM emple
+    WHERE dept_no = v_cod_depart;
+    DBMS_OUTPUT.PUT_LINE(v_emples || ' empleados');
+    --v_resultado_funcion := ejercicio10(v_cod_depart, v_emple_max, v_emple_min);
+    
+    IF (ejercicio10(v_cod_depart, v_emple_max, v_emple_min) /*v_resultado_funcion*/ >= 0) THEN
+        DBMS_OUTPUT.PUT_LINE('Se ha borrado el departamento y sus empleados');
+    ELSE
+        DBMS_OUTPUT.PUT_LINE('No se ha borrado ningún departamento');
+    END IF;
+
+EXCEPTION
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE(SQLERRM);
+END;
+/

@@ -100,7 +100,7 @@ EXCEPTION
         DBMS_OUTPUT.PUT_LINE('Error '|| SQLERRM);
         RETURN -3;
         
-END;
+END ejercicio5;
 /
 
 /*Ej6*/
@@ -131,7 +131,7 @@ BEGIN
 EXCEPTION
     WHEN no_data_found THEN
         DBMS_OUTPUT.PUT_LINE('El empleado indicado no existe');
-END;
+END subirSalario;
 /
 
 /*Ej7*/
@@ -162,7 +162,7 @@ BEGIN
 EXCEPTION
     WHEN no_data_found THEN
         DBMS_OUTPUT.PUT_LINE('El empleado indicado no existe');
-END;
+END subirSalario;
 /
 
 /*Ej8*/
@@ -188,7 +188,7 @@ EXCEPTION
             INSERT INTO depart VALUES (v_dept_no, UPPER(p_nombre), UPPER(p_localidad));
             DBMS_OUTPUT.PUT_LINE('Nuevo departamento añadido con los siguientes datos '||v_dept_no||' '||p_nombre||' '||p_localidad);
         END IF;
-END;
+END insert_depart;
 /
     
 --8.1 (Opcion2)
@@ -214,7 +214,7 @@ BEGIN
     ELSE
         RAISE DUP_VAL_ON_INDEX;
     END IF;
-END;
+END insert_depart;
 /
     
 --8.2
@@ -237,7 +237,7 @@ BEGIN
     ELSE
         DBMS_OUTPUT.PUT_LINE('Este departamento no existe');
     END IF;
-END;
+END borrar_depart;
 /
     
 --8.3
@@ -247,7 +247,7 @@ BEGIN
     UPDATE depart
         SET loc = UPPER(p_loc)
     WHERE dept_no = p_dept_no;
-END;
+END modifica_localidad;
 /
     
 --8.4
@@ -266,7 +266,7 @@ BEGIN
     WHERE dept_no = p_dept_num;
     
     DBMS_OUTPUT.PUT_LINE('El departamento con numero ' || p_dept_num || ' es el de ' || v_dnombre || ' está en ' || v_loc || ' y tiene ' || v_total_emple || ' empleados');
-END;
+END visualiza_datos_depart;
 /
 -- Podemos ahorrar variables sustituyendolas por v_depart%ROWTYPE
 CREATE OR REPLACE PROCEDURE visualiza_datos_depart(p_dept_num depart.dept_no%TYPE)
@@ -283,5 +283,34 @@ BEGIN
     WHERE dept_no = p_dept_num;
     
     DBMS_OUTPUT.PUT_LINE('El departamento con numero ' || v_depart.dept_no || ' es el de ' || v_depart.dnombre || ' está en ' || v_depart.loc || ' y tiene ' || v_total_emple || ' empleados');
+END visualiza_datos_depart;
+/
+
+/*Ej9*/
+CREATE OR REPLACE FUNCTION ejercicio9(p_fecha_inicio leidos.fecha%TYPE, p_fecha_fin leidos.fecha%TYPE, p_nombre_libro paraleer.nombre_libro%TYPE)
+RETURN NUMBER AS
+    v_total_libros NUMBER(5);
+BEGIN
+    SELECT COUNT(1) INTO v_total_libros
+        FROM leidos l, paraleer p
+    WHERE l.cod_libro = p.cod_libro
+        AND l.fecha BETWEEN p_fecha_inicio AND p_fecha_fin
+        AND UPPER(p.nombre_libro) = UPPER(p_nombre_libro);
+    
+    RETURN v_total_libros;
+END ejercicio9;
+/
+
+DECLARE
+    v_fecha_inicio leidos.fecha%TYPE;
+    v_fecha_fin leidos.fecha%TYPE;
+    v_nombre_libro paraleer.nombre_libro%TYPE;
+BEGIN
+    v_fecha_inicio := '&fecha_inicio';
+    v_fecha_fin := '&fecha_fin';
+    v_nombre_libro := '&nombre_libro';
+    
+    DBMS_OUTPUT.PUT_LINE('En ese tiempo se ha leido el libro ' || ejercicio9(v_fecha_inicio, v_fecha_fin, v_nombre_libro) || ' veces');
+    
 END;
 /

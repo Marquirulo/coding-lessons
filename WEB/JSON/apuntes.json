@@ -1,0 +1,28 @@
+/*
+AJAX = Asynchronous Javascript And XML -> Permite ejecutar los objetos de JavaScript pero si llegar a cargar la página
+JSON = JavaScript Object Notation
+  JSON facilita la lectura de los ficheros respecto a XML pero no permite tantas cosas
+*/
+/**** ESTRUCTURA DEL JSON ****/
+    elementoRaiz:[
+        {"nombreElemento1:valorElemento1", "nombreElemento2:valorElemento2"}, -> OBJETO1
+        {"nombreElemento1:valorElemento1", "nombreElemento2:valorElemento2"}, -> OBJETO2
+        {"nombreElemento1:valorElemento1", "nombreElemento2:valorElemento2"}  -> OBJETO3
+    ]
+
+/**** TIPO DE DATO ****/
+    /* STRINGS */
+        {" nombre ":"John","apellido":"Doe"},
+    /* NUMEROS */
+        { "edad":30, "tensionArterial":12.1 }
+    /* OBJETOS JSON */
+        { "empleado":{"nombre":"John","edad":30,"ciudad":"New York"} }
+    /* ARRAYS */
+        { "empleados":["John","Anna","Peter"] }
+    /* BOOLEANS */
+        { "venta":true }
+    /* NULL */
+        { "apodo":null }
+/**** FUNCIONES JSON ****/
+  var = JSON.parse('{ "nombre":"John", "edad":30, "ciudad":"New York"}'); -> Convierte string a un elemento JSON
+  var = JSON.stringify({ name: "John", age: 30, city: "New York" }); -> Convierte un objeto JSON en string literal

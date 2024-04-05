@@ -30,3 +30,7 @@
    | r2c1  |  r2c2 | --> v1 := r2c1; v2 := r2c2; Ó v_rowtype := r2c1,r2c2;
 
   /**** ATRIBUTOS ****/
+    nombrecursor%FOUND -- Devuelve verdadero si el último FETCH ha recuperado algún valor; en caso contrario devuelve falso; si el cursor no está abierto nos devuelve error (exception INVALID_CURSOR). Si estaba abierto pero no se había ejecutado aún ningún FETCH, devuelve NULL.
+    nombrecursor%NOTFOUND -- Hace lo contrario que el atributo anterior, para los casos en los que el cursor está abierto.
+    nombrecursor%FOUND -- Nos devuelve el número de filas recuperadas hasta el momento por el cursor. Si el cursor no está abierto nos devuelve la exception INVALID_CURSOR.
+    nombrecursor%ISOPEN -- Devuelve verdadero si el cursor está abierto y falso en otro caso.

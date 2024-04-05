@@ -21,7 +21,7 @@
         -- Sentencias PLSQL
       END LOOP;
     CLOSE nombrecursor
-      
+
   /** EXPLICACION **/
   -- El cursor recorre cada registro uno a uno, almacena los campos en las variables creadas (o una única variable con v_nombre nombreCursor%ROWTYPE) y ejecuta las sentencias SQL indicadas para cada uno
    | col1  |  col2 |
@@ -34,3 +34,22 @@
     nombrecursor%NOTFOUND -- Hace lo contrario que el atributo anterior, para los casos en los que el cursor está abierto.
     nombrecursor%FOUND -- Nos devuelve el número de filas recuperadas hasta el momento por el cursor. Si el cursor no está abierto nos devuelve la exception INVALID_CURSOR.
     nombrecursor%ISOPEN -- Devuelve verdadero si el cursor está abierto y falso en otro caso.
+
+/**** EJEMPLO ESTRUCTURA ****/
+  DECLARE
+    v_nombre VARCHAR2(50);
+    v_tipo VARCHAR2(50);
+    v_desc VARCHAR2(50);
+    CURSOR clugar IS
+      SELECT l_nombre, l_tipo, l_descripcion
+        FROM lugar;
+  BEGIN
+    OPEN clugar;
+      LOOP
+        FETCH clugar INTO v_nombre, v_tipo, v_desc;
+        EXIT WHEN clugar%NOTFOUND;
+        DBMS_OUTPUT.PUT_LINE(v_nombre ||' * '|| v_tipo ||' * '|| v_desc);
+      END LOOP;
+    CLOSE clugar;
+  END;
+  /

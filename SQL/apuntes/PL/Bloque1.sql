@@ -1,131 +1,214 @@
--- Solo DML
-/** Tipos de datos:
-     Compuestos: Colecciones y registros
-     Referencias: Punteros
-     LOB: Localizadores
-     Escalares: Nº, Caracteres, Fechas...
-          VARCHAR(n)
-          NUMBER(p,e)
-          BOOLEAN(TRUE|FALSE|NULL)
-          DATE
-          TIMESTAMP(p)
-**/
+/*Ej1*/
+DECLARE
+    v_apellido emple.apellido%TYPE;
+    CURSOR c_apellido IS
+        SELECT apellido
+            FROM emple 
+        WHERE dept_no = 20;
+BEGIN
+    OPEN c_apellido;
+        LOOP
+            FETCH c_apellido INTO v_apellido;
+            EXIT WHEN c_apellido%NOTFOUND;
+            DBMS_OUTPUT.PUT_LINE(v_apellido);
+        END LOOP;
+    CLOSE c_apellido;
+END;
+/
 
-/**** VARIABLES ****/
--- El operador de asinación es :=
-importe number(8,2); --Inicializar una variable (DF = NULL)
-contador number(2,0) := 0; -- Inicializar una variable con un valor
-nombre char(20) NOT NULL := 'Marcos'; -- Inicializar una variable con un valor y fuerzo que siempre tenga un valor
-eliminado BOOLEAN DEFAULT FALSE; -- Inicializar una variable con un valor por defecto
+/*Ej2*/
+CREATE OR REPLACE PROCEDURE ejercicio2(p_dept_no emple.dept_no%TYPE)
+AS
+    v_apellido emple.apellido%TYPE;
+    CURSOR cApellido IS
+        SELECT apellido
+            FROM emple 
+        WHERE dept_no = p_dept_no;
+BEGIN
+    OPEN cApellido;
+        FETCH cApellido INTO v_apellido;
+        
+        WHILE cApellido%FOUND LOOP
+            IF v_apellido IS NULL THEN
+                DBMS_OUTPUT.PUT_LINE('Apellido Nulo');
+                FETCH cApellido INTO v_apellido;
+            ELSE
+                DBMS_OUTPUT.PUT_LINE(v_apellido);
+                FETCH cApellido INTO v_apellido;
+            END IF;
+        END LOOP;
+    CLOSE cApellido;
+END;
+/
 
-/**** CURSORES ****/
--- En PL, los resultados de consultas no se muestran en pantalla, sino que se almacenan en una area de memoria a parte
+/*Ej3*/
+CREATE OR REPLACE PROCEDURE ejercicio3(p_dept_no emple.dept_no%TYPE)
+AS
+    v_apellido emple.apellido%TYPE;
+    CURSOR cApellido IS
+        SELECT apellido
+            FROM emple 
+        WHERE dept_no = p_dept_no;
+BEGIN
+        FOR reg IN cApellido LOOP
+            IF reg.apellido IS NULL THEN
+                DBMS_OUTPUT.PUT_LINE('Apellido Nulo');
+            ELSE
+                DBMS_OUTPUT.PUT_LINE(reg.apellido);
+            END IF;
+        END LOOP;
+END;
+/
 
-     /* IMPLICITOS */
-     -- Se usan para operaciones SELECT INTO, es decir cuando la consulta devuelve solo un registro
-     /*
-      No deben ser declarados
-      Para cada uno debe existir INTO
-      Las variables que reciben los datos deberían usar nombreCampo%TYPE;
-      Si devuelven más de 1 registro se produce una excepción
-     */
-     DECLARE
-          v_ape emple.apellido%TYPE
-          v_oficio emple.oficio%TYPE
-     BEGIN
-          SELECT apellido, oficio INTO v_ape, v_oficio
-               FROM emple
-          WHERE emp_no = 7782;
-     END;
+/*Ej4*/
+DECLARE
+    CURSOR cApellido IS
+        SELECT *
+            FROM emple 
+        WHERE comision > 50000;
+BEGIN
+        FOR reg IN cApellido LOOP
+            DBMS_OUTPUT.PUT_LINE(reg.apellido || ' * ' || reg.oficio || ' * ' ||reg.comision );
+        END LOOP;
+END;
+/
 
-     /* EXPLICITOS */
-     -- Son declarados y controlados por el programador.
+/*Ej5*/
+CREATE OR REPLACE PROCEDURE ejercicio5
+AS
+    v_dept_no emple.dept_no%TYPE; 
+    v_total_emple NUMBER(3);
+    CURSOR cEmple IS
+        SELECT d.dept_no, COUNT(e.emp_no) total_emple
+            FROM emple e, depart d
+        WHERE e.dept_no(+) = d.dept_no
+        GROUP BY d.dept_no;
+BEGIN
+    OPEN cEmple;
+        FETCH cEmple INTO v_dept_no, v_total_emple;
+        WHILE cEmple%FOUND LOOP
+            DBMS_OUTPUT.PUT_LINE(v_dept_no || '*' || v_total_emple);
+            FETCH cEmple INTO v_dept_no, v_total_emple;
+        END LOOP;
+    CLOSE cEmple;
+END ejercicio5;
+/
 
-/**** ATRIBUTOS ****/
-     /* %TYPE */
-     -- Permiten asignar el tipo de una variable referenciada a un campo o variable ya existente
-          n_dept depart.cod_dept%TYPE;
-     /* %ROWTYPE */
+/*Ej6*/
 
-     /*%ROWCOUNT*/
-     -- Cuenta registros
-          SQL%ROWCOUNT -- Cuenta los registros afectados por al ultima sentencia DML *ver SQL* 
-               
-/**** SQL ****/
-     SQL -- Hace referencia a la ultima sentencia DML realizada
-               
-/**** BLOQUE DE LOS PROCEDIMIENTOS ****/
- /* BLOQUE ANÓNIMO */
-     DECLARE [IS | AS] -- OPCIONAL
-          [declaraciones] -- Definimos todos los objetos
-     BEGIN
-          [instrucciones] -- Conteiene las sentencias ejecutables de PL/SQL
-     EXCEPTION -- OPCIONAL
-          [tratamiento de excepciones] -- Tratamiento de errores (Como en Python)
-     END;
-     / -- Esto es una buena práctica para tanto tu como el SQL seais capaces de diferenciar los distintos bloques de procedimientos.
+/*Ej7*/
+DECLARE
+    v_apellido emple.apellido%TYPE;
+    v_fecha_alt emple.fecha_alt%TYPE;
+    
+    CURSOR cAltaEmp IS
+        SELECT apellido, fecha_alt
+            FROM emple
+        ORDER BY fecha_alt;
+BEGIN
+    OPEN cAltaEmp;
+        FETCH cAltaEmp INTO v_apellido,v_fecha_alt;
+        WHILE cAltaEmp%FOUND LOOP
+            DBMS_OUTPUT.PUT_LINE(v_apellido||' * '||v_fecha_alt);
+            FETCH cAltaEmp INTO v_apellido,v_fecha_alt;
+        END LOOP;
+    CLOSE cAltaEmp;
+END;
+/
 
-/**** ENTRADA DE DATOS ****/
-     /*Variables de sustitución*/
-     -- Se declaran con & delante. Y fuerza que cada vez que se ejecute &variable_input pregunte por el valor.
-          SET SERVEROUTPUT ON;
-          DECLARE
-               v_first_name VARCHAR2(50);
-               v_last_name VARCHAR2(50);
-          BEGIN
-               SELECT first_name, last_name
-                    INTO v_first_name, v_last_name
-                    FROM hr.employees
-               WHERE employee_id = &employee_input;--& Variable de sustitución.
-               DBMS_OUTPUT.PUT_LINE('Nombre Apellido: ' || v_first_name || ' - ' || v_last_name);
-          END;
+/*Ej8*/
+CREATE OR REPLACE PROCEDURE ejercicio8(p_max_char NUMBER)
+AS
+    v_emp_no emple.emp_no%TYPE;
+    v_apellido emple.apellido%TYPE;
+    
+    CURSOR pEmpleados IS
+        SELECT emp_no, apellido
+            FROM emple
+        WHERE LENGTH(apellido) = p_max_char;
+BEGIN
+    DBMS_OUTPUT.PUT_LINE('Empleados con '|| p_max_char || ' letras en el apellido:');
+    DBMS_OUTPUT.PUT_LINE('--------------------------------------------------------');
+    OPEN pEmpleados;
+        FETCH pEmpleados INTO v_emp_no, v_apellido;
+        WHILE pEmpleados%FOUND LOOP
+            DBMS_OUTPUT.PUT_LINE(v_emp_no || ' * ' || v_apellido);
+            FETCH pEmpleados INTO v_emp_no, v_apellido;
+        END LOOP;
+        IF pEmpleados%ROWCOUNT = 0 THEN
+            DBMS_OUTPUT.PUT_LINE('No hay apellidos con esa longitud');
+        END IF;
+    CLOSE pEmpleados;
+END;
+/
 
-/**** SALIDA POR PANTALLA ****/
-     SET SERVEROUTPUT ON; -- Activa la salida por pantalla
-     DBMS_OUTPUT.PUT_LINE('Hola ' || nombre);
-     DBMS_OUTPUT.PUT_LINE('Error en la aplicación ' || SQLERRM);
+/*Ej9*/
 
-/**** EXCEPCIONES ****/
--- Al igual que en otros lenguajes permite controlar los errores
+/*Ej10*/
+DECLARE
+    v_cont  NUMBER(2);
+    v_emp_no emple.emp_no%TYPE;
+    v_apellido emple.apellido%TYPE;
+    CURSOR cMenorSalario IS
+        SELECT emp_no, apellido
+            FROM emple
+        ORDER BY salario+comision;
+BEGIN
+    v_cont := 0;
+    OPEN cMenorSalario;
+        FETCH cMenorSalario INTO v_emp_no, v_apellido;
+        WHILE cMenorSalario%FOUND AND v_cont < 5 LOOP
+            DBMS_OUTPUT.PUT_LINE(v_emp_no || ' * ' || v_apellido);
+            FETCH cMenorSalario INTO v_emp_no, v_apellido;
+            v_cont := v_cont + 1;
+        END LOOP;
+    CLOSE cMenorSalario;
+END;
+/
+
+/*Ej11*/
+CREATE OR REPLACE FUNCTION ejercicio11(p_min_salario emple.salario%TYPE, p_max_salario emple.salario%TYPE)
+RETURN NUMBER AS
+    v_apellido emple.apellido%TYPE;
+    CURSOR empleEntreSalarios IS
+        SELECT apellido
+            FROM emple
+        WHERE salario BETWEEN p_min_salario AND p_max_salario;
+BEGIN
+    OPEN empleEntreSalarios;
+        FETCH empleEntreSalarios INTO v_apellido;
+        WHILE empleEntreSalarios%FOUND LOOP
+            FETCH empleEntreSalarios INTO v_apellido;
+        END LOOP;
+        RETURN empleEntreSalarios%ROWCOUNT;
+    CLOSE empleEntreSalarios;
 EXCEPTION
-     /*Para levantar las personalizadas surgen de otros bloques (por ej. en un IF) con RAISE error_perso_1;*/
-     WHEN error_perso_1 THEN -- Definida por el usuario
-          RAISE_APPLICATION_ERROR([-20001 a -20999],'Mensaje de error personalizado'); -- Creas un error indicado un nº ORA entre 20001 y 20999
-     WHEN excepcio_comun THEN -- Definida por el sistema
-          DBMS_OUTPUT.PUT_LINE('SQLCODE: ' || SQLCODE); -- SQLCODE muestra el código que ha fallado
-          DBMS_OUTPUT.PUT_LINE('SQLERRM: ' || SQLERRM); -- SQLERRM Devuelve el código de error especifico.
-     WHEN OTHERS THEN -- Indicaciones para el resto de errores
-          /*Este código permite crear una tabla como log de errores*/
-          err_code := SQLCODE;
-          err_msg := SUBSTR(SQLERRM, 1, 200);
-          INSERT INTO log_table (error_number, error_message)
-          VALUES (err_code, err_msg);
--- Excepciones comunes (X = USAR)
-    X TOO_MANY_ROWS     -- Se produce cuando SELECT xxx INTO devuelve más de una fila.
-    X NO_DATA_FOUND     -- Se produce cuando SELECT xxx INTO no devuelve ninguna fila.
-      LOGIN_DENIED      -- Error cuando intentamos conectarnos a Oracle con un login y clave no validos.
-      NOT_LOGGED_ON     -- Se produce cuando intentamos acceder a la base de datos sin estar conectados.
-      PROGRAM_ERROR     -- Se produce cuando hay un problema interno en la ejecución del programa.
-    X VALUE_ERROR       -- Se produce cuando hay un error aritmético o de conversión.
-    X ZERO_DIVIDE       -- Se puede cuando hay una división entre 0.
-    X DUP_VAL_ON_INDEX  -- Se crea cuando se intenta almacenar un valor que crearía duplicados en la clave primaria o en una columna con restricción UNIQUE.
-    X INVALID_NUMBER    -- Se produce cuando se intenta convertir una cadena a un valor numérico.
+    WHEN OTHERS THEN
+        RETURN -1;
+END;
+/
 
-/**** ESTRUCTURAS DE CONTROL ****/
-/*CONDICIONAL*/
--- En SQL las condiciones pueden ser = a TRUE NULL FALSE (FALSE y NULL son iguales)
-     IF (condicion) THEN
-         ejecuciones;
-     ELSIF (condicion2) AND (condicion2_2) THEN
-         ejecuciones2;
-     ELSE
-         ejecuciones3;
-     END IF;
--- Se pueden usar CASE al igual que en SELECT
-     CASE [expresion]
-          WHEN condicion1 THEN resultado1;
-          WHEN condicion2 THEN resultado2;
-          ...
-          WHEN condicionN THEN resultadoN;
-     ELSE resultado;
-     END CASE ;
+/*Ej12*/
+CREATE OR REPLACE PROCEDURE ejercicio12(p_cod_fabricante1 fabricantes.cod_fabricante%TYPE, p_cod_fabricante2 fabricantes.cod_fabricante%TYPE)
+AS
+    v_cod_art articulos.articulo%TYPE;
+    v_peso articulos.peso%TYPE;
+    v_cat articulos.categoria%TYPE;
+    CURSOR cProductos IS
+        SELECT a.articulo, a.peso, a.categoria
+            FROM fabricantes f, articulos a
+        WHERE f.cod_fabricante = a.cod_fabricante
+            AND f.cod_fabricante BETWEEN p_cod_fabricante1 AND p_cod_fabricante2;
+BEGIN
+    OPEN cProductos;
+        FETCH cProductos INTO v_cod_art, v_peso, v_cat;
+        WHILE cProductos%FOUND LOOP
+            DBMS_OUTPUT.PUT_LINE(v_cod_art || ' * ' || v_peso || ' * ' || v_cat);
+            FETCH cProductos INTO v_cod_art, v_peso, v_cat;
+        END LOOP;
+    CLOSE cProductos;
+EXCEPTION
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE(SQLERRM);
+END;
+/

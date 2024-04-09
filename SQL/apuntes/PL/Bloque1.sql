@@ -93,8 +93,22 @@ BEGIN
     CLOSE cEmple;
 END ejercicio5;
 /
-
+    
 /*Ej6*/
+DECLARE
+    v_apellido emple.apellido%TYPE;
+    v_fecha_alt emple.fecha_alt%TYPE;
+    
+    CURSOR cAltaEmp IS
+        SELECT apellido, fecha_alt
+            FROM emple
+        ORDER BY fecha_alt;
+BEGIN
+        FOR reg IN cAltaEmp LOOP
+            DBMS_OUTPUT.PUT_LINE(reg.apellido || '*' || reg.fecha_alt);
+        END LOOP;
+END;
+/
 
 /*Ej7*/
 DECLARE

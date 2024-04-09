@@ -95,6 +95,20 @@ END ejercicio5;
 /
 
 /*Ej6*/
+DECLARE
+    v_apellido emple.apellido%TYPE;
+    v_fecha_alt emple.fecha_alt%TYPE;
+    
+    CURSOR cAltaEmp IS
+        SELECT apellido, fecha_alt
+            FROM emple
+        ORDER BY fecha_alt;
+BEGIN
+        FOR reg IN cAltaEmp LOOP
+            DBMS_OUTPUT.PUT_LINE(reg.apellido || '*' || reg.fecha_alt);
+        END LOOP;
+END;
+/
 
 /*Ej7*/
 DECLARE
@@ -139,6 +153,28 @@ BEGIN
 END;
 /
 
+/*Ej9*/
+CREATE OR REPLACE PROCEDURE ejercicio9(n emple.dept_no%TYPE)
+AS
+    CURSOR c1 IS
+        SELECT *
+            FROM depart
+        WHERE dept_no BETWEEN n AND n+4;
+        
+    CURSOR c2(v_depart emple.dept_no%TYPE) IS
+        SELECT *
+            FROM emple
+        WHERE dept_no = v_depart;
+BEGIN
+    FOR i IN c1 LOOP
+        DBMS_OUTPUT.PUT_LINE('El departamento ' || i.dept_no ||' tiene los siguientes empleados');
+        FOR j IN c2(i.dept_no) LOOP
+            DBMS_OUTPUT.PUT_LINE(j.apellido);
+        END LOOP;
+    END LOOP;
+END;
+/
+    
 /*Ej10*/
 DECLARE
     CURSOR cMenorSalario IS

@@ -86,4 +86,24 @@
   END;
   /
 
-/****  ****/
+/**** CURSORES CON PARÁMETROS ****/
+DECLARE
+  CURSOR C2 (depart emple.dept_no%TYPE) IS
+    SELECT *
+      FROM emple
+    WHERE dept_no = depart
+      AND oficio = oficioEmple;
+
+  CURSOR C2 (depart emple.dept_no%TYPE) IS
+    SELECT *
+      FROM emple
+    WHERE dept_no = depart
+      AND oficio = oficioEmple;
+BEGIN
+  FOR i IN c1 LOOP
+    DBMS_OUTPUT.PUT_LINE(i.dept_no);
+    FOR j IN c2(i.dept_no) LOOP
+        DBMS_OUTPUT.PUT_LINE('El empleado' || j.emp_no || ' del departamento ' || i.dept_no);
+    END LOOP;
+  END LOOP;
+END;

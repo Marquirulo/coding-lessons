@@ -32,10 +32,11 @@
   /**** ATRIBUTOS ****/
     nombrecursor%FOUND -- Devuelve verdadero si el último FETCH ha recuperado algún valor; en caso contrario devuelve falso; si el cursor no está abierto nos devuelve error (exception INVALID_CURSOR). Si estaba abierto pero no se había ejecutado aún ningún FETCH, devuelve NULL.
     nombrecursor%NOTFOUND -- Hace lo contrario que el atributo anterior, para los casos en los que el cursor está abierto.
-    nombrecursor%FOUND -- Nos devuelve el número de filas recuperadas hasta el momento por el cursor. Si el cursor no está abierto nos devuelve la exception INVALID_CURSOR.
+    nombrecursor%ROWCOUNT -- Nos devuelve el número de filas recuperadas hasta el momento por el cursor. Si el cursor no está abierto nos devuelve la exception INVALID_CURSOR.
     nombrecursor%ISOPEN -- Devuelve verdadero si el cursor está abierto y falso en otro caso.
 
 /**** EJEMPLO ESTRUCTURA ****/
+/* LOOP */
   DECLARE
     v_nombre VARCHAR2(50);
     v_tipo VARCHAR2(50);
@@ -53,3 +54,36 @@
     CLOSE clugar;
   END;
   /
+    
+/* WHILE */
+  DECLARE
+    v_nombre VARCHAR2(50);
+    v_tipo VARCHAR2(50);
+    v_desc VARCHAR2(50);
+    CURSOR clugar IS
+      SELECT l_nombre, l_tipo, l_descripcion
+        FROM lugar;
+  BEGIN
+    OPEN clugar;
+      FETCH clugar INTO v_nombre, v_tipo, v_desc;
+      WHILE clugar%FOUND LOOP
+        DBMS_OUTPUT.PUT_LINE(v_nombre ||' * '|| v_tipo ||' * '|| v_desc);
+        FETCH clugar INTO v_nombre, v_tipo, v_desc;
+      END LOOP;
+    CLOSE clugar;
+  END;
+  /
+    
+/* FOR */
+  DECLARE
+    CURSOR clugar IS
+      SELECT l_nombre, l_tipo, l_descripcion
+        FROM lugar;
+  BEGIN
+    FOR reg IN clugar LOOP
+      DBMS_OUTPUT.PUT_LINE(clugar.l_nombre ||' * '|| clugar.l_tipo ||' * '|| clugar.l_descripcion);
+    END LOOP;
+  END;
+  /
+
+/****  ****/

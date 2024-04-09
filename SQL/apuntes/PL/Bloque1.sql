@@ -38,7 +38,7 @@ BEGIN
             END IF;
         END LOOP;
     CLOSE cApellido;
-END;
+END ejercicio2;
 /
 
 /*Ej3*/
@@ -57,7 +57,7 @@ BEGIN
                 DBMS_OUTPUT.PUT_LINE(reg.apellido);
             END IF;
         END LOOP;
-END;
+END ejercicio3;
 /
 
 /*Ej4*/
@@ -153,7 +153,7 @@ BEGIN
             DBMS_OUTPUT.PUT_LINE('No hay apellidos con esa longitud');
         END IF;
     CLOSE pEmpleados;
-END;
+END ejercicio8;
 /
 
 /*Ej9*/
@@ -199,7 +199,7 @@ BEGIN
 EXCEPTION
     WHEN OTHERS THEN
         RETURN -1;
-END;
+END ejercicio11;
 /
 
 /*Ej12*/
@@ -224,5 +224,5 @@ BEGIN
 EXCEPTION
     WHEN OTHERS THEN
         DBMS_OUTPUT.PUT_LINE(SQLERRM);
-END;
+END ejercicio12;
 /

@@ -191,3 +191,49 @@ BEGIN
     CLOSE cMenorSalario;
 END;
 /
+
+/*Ej11*/
+create or replace FUNCTION ejercicio11(p_min_salario emple.salario%TYPE, p_max_salario emple.salario%TYPE)
+RETURN NUMBER AS
+    v_apellido emple.apellido%TYPE;
+    CURSOR empleEntreSalarios IS
+        SELECT apellido
+            FROM emple
+        WHERE salario BETWEEN p_min_salario AND p_max_salario;
+BEGIN
+    OPEN empleEntreSalarios;
+        FETCH empleEntreSalarios INTO v_apellido;
+        WHILE empleEntreSalarios%FOUND LOOP
+            FETCH empleEntreSalarios INTO v_apellido;
+        END LOOP;
+        RETURN empleEntreSalarios%ROWCOUNT;
+    CLOSE empleEntreSalarios;
+EXCEPTION
+    WHEN OTHERS THEN
+        RETURN -1;
+END;
+
+
+/*Ej12*/
+CREATE OR REPLACE PROCEDURE ejercicio12(p_cod_fabricante1 fabricantes.cod_fabricante%TYPE, p_cod_fabricante2 fabricantes.cod_fabricante%TYPE)
+AS
+    v_cod_art articulos.articulo%TYPE;
+    v_peso articulos.peso%TYPE;
+    v_cat articulos.categoria%TYPE;
+    CURSOR cProductos IS
+        SELECT a.articulo, a.peso, a.categoria
+            FROM fabricantes f, articulos a
+        WHERE f.cod_fabricante = a.cod_fabricante
+            AND f.cod_fabricante BETWEEN p_cod_fabricante1 -1 AND p_cod_fabricante2 +1;
+BEGIN
+    OPEN cProductos;
+        FETCH cProductos INTO v_cod_art, v_peso, v_cat;
+        WHILE cProductos%FOUND LOOP
+            DBMS_OUTPUT.PUT_LINE(v_cod_art || ' * ' || v_peso || ' * ' || v_cat);
+            FETCH cProductos INTO v_cod_art, v_peso, v_cat;
+        END LOOP;
+    CLOSE cProductos;
+EXCEPTION
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE(SQLERRM);
+END;

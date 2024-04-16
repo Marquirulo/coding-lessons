@@ -79,3 +79,48 @@ EXCEPTION
         DBMS_OUTPUT.PUT_LINE(SQLERRM);
 END;
 /
+
+/*Ej5*/
+DECLARE
+    CURSOR cLibro IS
+        SELECT cod_libro, titulo 
+            FROM libros2;
+            
+    CURSOR cFechas(p_cod_libro prestamo.cod_libro%TYPE) IS
+        SELECT TO_CHAR(fecha_prestamo, 'DD**MM**YYYY') fecha
+            FROM prestamo
+        WHERE cod_libro = p_cod_libro
+        ORDER BY fecha_prestamo;
+BEGIN
+    FOR i IN cLibro LOOP
+        DBMS_OUTPUT.PUT_LINE('Código '|| i.cod_libro ||' Titulo '|| i.titulo);
+    
+        FOR j IN cFechas(i.cod_libro) LOOP
+            DBMS_OUTPUT.PUT_LINE(j.fecha);
+        END LOOP;
+        
+    END LOOP;
+END;
+/
+
+/*Ej6*/
+DECLARE
+    CURSOR cProducto IS
+        SELECT cod_producto
+            FROM productos;
+    CURSOR cCantidad(producto ventascp.cod_producto%TYPE) IS
+        SELECT nif, cod_producto, SUM(unidades) sumaUnidades
+            FROM ventascp
+        WHERE cod_producto = producto
+        GROUP BY nif, cod_producto;
+BEGIN
+    FOR i IN cProducto LOOP
+        DBMS_OUTPUT.PUT_LINE('Cod: ' || i.cod_producto);
+        
+        FOR j IN cCantidad(i.cod_producto) LOOP
+            DBMS_OUTPUT.PUT_LINE('- nif: '||j.nif || ' unidades: '||j.sumaUnidades);            
+        END LOOP;
+        
+    END LOOP;
+END;
+/

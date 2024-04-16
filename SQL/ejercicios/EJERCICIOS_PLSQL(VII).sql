@@ -104,7 +104,9 @@ END;
 /
 
 /*Ej6*/
+/*Ej6*/
 DECLARE
+    v_contar NUMBER(3);
     CURSOR cProducto IS
         SELECT cod_producto
             FROM productos;
@@ -117,10 +119,15 @@ BEGIN
     FOR i IN cProducto LOOP
         DBMS_OUTPUT.PUT_LINE('Cod: ' || i.cod_producto);
         
-        FOR j IN cCantidad(i.cod_producto) LOOP
-            DBMS_OUTPUT.PUT_LINE('- nif: '||j.nif || ' unidades: '||j.sumaUnidades);            
-        END LOOP;
+        v_contar := 0;
         
-    END LOOP;
+        FOR j IN cCantidad(i.cod_producto) LOOP
+            DBMS_OUTPUT.PUT_LINE('- nif: '||j.nif || ' unidades: '||j.sumaUnidades);
+            v_contar := v_contar+1;
+        END LOOP;
+        IF v_contar = 0 THEN
+        DBMS_OUTPUT.PUT_LINE('Sin ventas');
+    END IF;
+    END LOOP;    
 END;
 /

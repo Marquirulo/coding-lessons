@@ -39,3 +39,6 @@ Este tipo de bases de datos ofrece una navegación más eficiente entre relacion
 A diferencia de las bases de datos relacionales, las bases de datos en
 columnas almacenan sus datos por columnas, en lugar de por filas. Estas
 columnas se agrupan para formar subgrupos.
+
+**BASE**
+Basically-Available: En lugar de imponer la consistencia inmediata, las bases de datos NoSQL garantizarán la disponibilidad de los datos distribuyéndolos y replicándolos entre los nodos del clúster de bases de datos.

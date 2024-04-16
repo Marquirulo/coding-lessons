@@ -8,3 +8,22 @@ Una colección es un grupo de documentos de MongoDB, y se corresponde con una ta
 
 Una base de datos es un contenedor de colecciones, al igual que un RDBMS es un contenedor de tablas para las bases de datos relacionales. Cada uno tiene su propio conjunto de archivos en el sistema de archivos. Un servidor MongoDB puede almacenar múltiples bases de datos.
 */
+/*** OPERACIONES BASICAS ***/
+db -> Muestra la BBDD actual
+show databases -> Muestra las BBDD
+use nombre_BBDD -> Cambia de BBDD activa
+db.nombre_coleccion.find() -> Consultar los datos de una colección 
+  
+Insertar documentos en una coleccion (registros en tablas):
+-- Inserta un único registro
+  db.personas.insertOne({"Tipo":"Profesor", 
+                         "Nombre":"Ana",
+                         "Apellidos":"Palma",
+                         "Asignaturas":["Matemáticas","Física","Química"]})
+-- Inserta varios registros
+  db.personas.insertMany([{Tipo: "Alumno", Nombre: "Felipe", Apellidos: "Martín", Calificaciones: {"Matemáticas": 8, "Física": 5.5}},
+                          {Tipo: "Profesor", Nombre: "Irene", Apellidos: "Pérez", Asignaturas: ["Inglés","Física","Dibujo"]}])
+
+Importación de ficheros (Desde CMD): Requiere de la utilidad --> mongodb-org-tools
+mongoimport ruta_archivo.json -d database -c coleccion --jsonArray
+/* Si el .json no es un array de documentos, sino documentos uno tras otro, no hay que utilizar la opción –jsonArray */

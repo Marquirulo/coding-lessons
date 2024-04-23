@@ -1,0 +1,3 @@
+use prueba
+db.juguetes.insertOne{"cod_barras":"1234AA","descripción":"coche","precio":20}
+db.juguetes.insertMany([{"cod_barras":"1234BB","descripción":["cocina","utensilios"],"precio":30},{"cod_barras":"1234CC","descripción":"superheroe","precio":5}])

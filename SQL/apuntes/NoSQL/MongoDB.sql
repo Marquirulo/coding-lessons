@@ -75,6 +75,7 @@ $regex PERMITE INCLUIR EXPREASIONES REGULARES
 
 /* EJEMPLOS */
   db.personas.find({Tipo:{$in: ["Profesor","Alumno"]}}
+  db.personas.find({$and:[{Nombre:"Felipe"},{"Calificaciones.Matemáticas":{$not:{$lt:5}}}]})
   db.personas.find({Nombre: {$regex: '^J'}})
   db.personas.find({Nombre: {$regex: 'U', $options: 'i'}})
   

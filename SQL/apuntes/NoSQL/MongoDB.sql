@@ -54,8 +54,9 @@ db.personas.find({"Nominas.0.Cantidad": 1850.90}) --> Permite buscar por el indi
 db.personas.find().sort({Nombre:1}) --> Orden ascendente
 db.personas.find().sort({Nombre:-1}) --> Orden descendente
 db.personas.find().limit(num) --> Limita el número de resultados a mostrar
-db.personas.find().skip(num) --> Ssalta un número de documentos en las consultas.
-
+db.personas.find().skip(num) --> Salta un número de documentos en las consultas.
+-- Recomendable: .find().skip(num).limit(num)
+  
 /*** OPERADORES ***/
 $eq    IGUAL
 $gt    MAYOR
@@ -71,3 +72,9 @@ $not   INVIERTE LA CONDICION
 $regex PERMITE INCLUIR EXPREASIONES REGULARES
   $options PERMITE AÑADIR OPCIONES AL $regex. 
     $options:'i' --> Ignora Mayus/Minus
+
+/* EJEMPLOS */
+  db.personas.find({Tipo:{$in: ["Profesor","Alumno"]}}
+  db.personas.find({Nombre: {$regex: '^J'}})
+  db.personas.find({Nombre: {$regex: 'U', $options: 'i'}})
+  

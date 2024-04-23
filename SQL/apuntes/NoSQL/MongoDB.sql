@@ -43,4 +43,4 @@ db.nombre_coleccion.find()
 db.people.find().pretty() --> Devuelve formateado
 db.nombre_coleccion.findOne() --> Devuelve el primero de las coincidencias
 db.personas.find({Tipo: "Profesor", Nombre:"Ana"}) -> Aplica un filtro (consulta con WHERE)
-db.personas.find({Tipo:"Alumno"},{Tipo:1, Nombre:1, _id:0}) --> Indica una proyeccion (Que campos se muestran y cuales no)
+db.personas.find({Tipo:"Alumno"},{Tipo:1, Nombre:1, _id:0}) --> Indica una proyeccion (Que campos se muestran y cuales no) (No se pueden combinar proy. de inclusion y exclusion salvo para quitar el _id)

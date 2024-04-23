@@ -44,3 +44,30 @@ db.people.find().pretty() --> Devuelve formateado
 db.nombre_coleccion.findOne() --> Devuelve el primero de las coincidencias
 db.personas.find({Tipo: "Profesor", Nombre:"Ana"}) -> Aplica un filtro (consulta con WHERE)
 db.personas.find({Tipo:"Alumno"},{Tipo:1, Nombre:1, _id:0}) --> Indica una proyeccion (Que campos se muestran y cuales no) (No se pueden combinar proy. de inclusion y exclusion salvo para quitar el _id)
+  
+/** BUSCAR ARRAYS **/
+db.personas.find({"Calificaciones.Matemáticas":9}) --> DOT NOTATION: Permite buscar coincidencias parciales
+db.personas.find({"Calificaciones":{"Matemáticas":9,"Física":7.5,"Inglés": 6}}) --> Busca coincidencia exacta
+db.personas.find({"Nominas.0.Cantidad": 1850.90}) --> Permite buscar por el indice del documento (El primer objeto 0)
+
+/*** OTRAS FUNCIONES ***/
+db.personas.find().sort({Nombre:1}) --> Orden ascendente
+db.personas.find().sort({Nombre:-1}) --> Orden descendente
+db.personas.find().limit(num) --> Limita el número de resultados a mostrar
+db.personas.find().skip(num) --> Ssalta un número de documentos en las consultas.
+
+/*** OPERADORES ***/
+$eq    IGUAL
+$gt    MAYOR
+$gte   MAYOR O IGUAL
+$in    PERTENENCIA A UN CONJUNTO DE VALORES
+$lt    MENOR
+$lte   MENOR O IGUAL
+$ne    NO IGUAL O DISTINTO
+$nin   NO PERTENENCIA A UN CONJUNTO DE VALORES
+$and   INDICA QUE SE CUMPLAN AMBAS CONDICIONES
+$or    INDICA QUE SES CUMPLA UNA U OTRA CONDICIÓN (O AMBAS)
+$not   INVIERTE LA CONDICION
+$regex PERMITE INCLUIR EXPREASIONES REGULARES
+  $options PERMITE AÑADIR OPCIONES AL $regex. 
+    $options:'i' --> Ignora Mayus/Minus

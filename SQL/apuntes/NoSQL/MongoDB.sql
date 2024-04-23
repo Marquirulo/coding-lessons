@@ -12,7 +12,7 @@ Una base de datos es un contenedor de colecciones, al igual que un RDBMS es un c
 /*** OPERACIONES BASICAS ***/
 db -> Muestra la BBDD actual
 show databases -> Muestra las BBDD
-show collwctions -> Muestra las colecciones
+show collections -> Muestra las colecciones
 use nombre_BBDD -> Cambia de BBDD activa
 db.nombre_coleccion.find() -> Consultar los datos de una colección 
 

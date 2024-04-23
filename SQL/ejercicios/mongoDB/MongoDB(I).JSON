@@ -1,3 +1,128 @@
+/*Ej1*/
 use prueba
+/*Ej4*/
 db.juguetes.insertOne{"cod_barras":"1234AA","descripción":"coche","precio":20}
 db.juguetes.insertMany([{"cod_barras":"1234BB","descripción":["cocina","utensilios"],"precio":30},{"cod_barras":"1234CC","descripción":"superheroe","precio":5}])
+/*Ej4*/
+db.depart.insertMany([
+    {
+        "dept_no": 10,
+        "nombre": "CONTABILIDAD",
+        "loc": "SEVILLA"
+    },
+    {
+        "dept_no": 20,
+        "nombre": "INVESTIGACION",
+        "loc": "MADRID"
+    }
+])
+
+db.emple.insertMany([
+    {
+        "emp_no": 7369,
+        "apellido":"SÁNCHEZ",
+        "oficio":"EMPLEADO",
+        "dir": 7902,
+        "salario": 10000,
+        "comision": null,
+        "dept_no": 20
+    },
+    {
+        "emp_no": 7499, 
+        "apellido": "ARROYO", 
+        "oficio": "VENDEDOR", 
+        "dir": 7698, 
+        "salario": 20000, 
+        "comision": 1000, 
+        "dept_no": 20 
+    },
+    {
+        "emp_no": 7521, 
+        "apellido": "SALA", 
+        "oficio": "VENDEDOR", 
+        "dir": 7698, 
+        "salario": 30000, 
+        "comision": 65000, 
+        "dept_no": 10 
+    },
+    {
+        "emp_no": 7566, 
+        "apellido": "JIMÉNEZ", 
+        "oficio": "DIRECTOR", 
+        "dir": 7839, 
+        "salario": 40000, 
+        "comision": null, 
+        "dept_no": 10 
+    },
+    {
+        "emp_no": 7654, 
+        "apellido": "MARTÍN", 
+        "oficio": "VENDEDOR", 
+        "dir": 7698, 
+        "salario": 50000, 
+        "comision": 4000, 
+        "dept_no": 20 
+    },
+    {
+        "emp_no": 7698, 
+        "apellido": "NEGRO", 
+        "oficio": "DIRECTOR", 
+        "dir": 7839, 
+        "salario": 60000, 
+        "comision": 1200, 
+        "dept_no": 10 
+    },
+])
+
+/*Ej5*/
+mongoimport C:\Users\usuario\Desktop\peliculas_ejer5.json -d prueba -c movies2 --jsonArray
+
+db.movies.insertMany([{"title" : "Fight Club",
+"writer" : "Chuck Palahniuk",
+"year" : 1999,
+"actors" : [
+"Brad Pitt",
+"Edward Norton"
+]},
+
+{"title" : "Pulp Fiction",
+"writer" : "Quentin Tarantino",
+"year" : 1994,
+"actors" : [
+"John Travolta",
+"Uma Thurman"
+]},
+
+{"title" : "Inglorious Basterds",
+"writer" : "Quentin Tarantino",
+"year" : 2009,
+"actors" : [
+"Brad Pitt",
+"Diane Kruger",
+"Eli Roth"
+]},
+
+{"title" : "The Hobbit: An Unexpected Journey",
+"writer" : "J.R.R. Tolkein",
+"year" : 2012,
+"franchise" : "The Hobbit"},
+
+{"title" : "The Hobbit: The Desolation of Smaug",
+"writer" : "J.R.R. Tolkein",
+"year" : 2013,
+"franchise" : "The Hobbit"},
+
+{"title" : "The Hobbit: The Battle of the Five Armies",
+"writer" : "J.R.R. Tolkein",
+"year" : 2012,
+"franchise" : "The Hobbitsynopsis : Bilbo and Company are forced to engage in a war against an array of combatants and keep the Lonely Mountain from falling into the hands of a rising darkness."},
+
+{"title" : "Pee Wee Herman's Big Adventure"},
+
+{"title" : "Avatar"}])
+
+/*Ej6*/
+db.movies.find()
+db.movies.find({writer:"Quentin Tarantino"})
+db.movies.find({actors:"Brad Pitt"})
+db.movies.find({franchise:"The Hobbit"})

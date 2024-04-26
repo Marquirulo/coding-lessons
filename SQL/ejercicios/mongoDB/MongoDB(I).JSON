@@ -126,3 +126,42 @@ db.movies.find()
 db.movies.find({writer:"Quentin Tarantino"})
 db.movies.find({actors:"Brad Pitt"})
 db.movies.find({franchise:"The Hobbit"})
+db.movies.find({$and:[{year:{$gte:1990}},{year:{$lt:2000}}]})
+db.movies.find({$or:[{year:{$lt:2000}},{year:{$gt:2010}}]})
+
+/*Ej7*/
+db.movies.find({synopsis:{$regex:".*Bilbo.*"}})
+db.movies.find({synopsis:{$regex:".*Gandalf.*"}})
+
+/*Ej8*/
+db.ciudades.find({},{_id:0}).sort({country:1})
+db.ciudades.find({},{_id:0}).sort({country:1}).limit(2)
+db.ciudades.find({},{_id:0}).sort({country:1}).skip(2).limit(2)
+b.ciudades.find({},{country:0,_id:0}).sort({country:1}).limit(1)
+
+/*Ej9*/
+db.posts.insertMany([ { "username": "GoodGuyGreg", "title": "Passes out at party", "body": "Wakes up early and cleans house" }, { "username": "GoodGuyGreg", "title": "Steals your identity", "body": "Raises your credit score" }, { "username": "GoodGuyGreg", "title": "Reports a bug in your code", "body": "Sends you a Pull Request" }, { "username": "ScumbagSteve", "title": "Borrows something", "body": "Sells it" }, { "username": "ScumbagSteve", "title": "Borrows everything", "body": "The end" }, { "username": "ScumbagSteve", "title": "Forks your repo on github", "body": "Sets to private" }] )
+
+/*Ej10*/
+db.posts.find({username:"GoodGuyGreg"})
+db.posts.find({username:"ScumbagSteve"},{title:1,body:1,_id:0})
+db.posts.find({body:"The end"},{username:1,_id:0})
+db.posts.find({body:"The end"},{username:1,_id:0}).sort({username:1})
+db.posts.find().limit(3)
+db.posts.find({username:"GoodGuyGreg"}).limit(2)
+db.posts.find({username:"GoodGuyGreg"}).skip(2).limit(2)
+
+/*Ej12*/
+db.biblio.find({title:{$regex:'.*bibliobús.*',$options:'i'}},{_id:0})
+db.biblio.find({title:{$regex:'.*bibliobús.*',$options:'i'}},{"address.postal-code":1,"address.locality":1,_id:0})
+db.biblio.find({title:{$regex:'.*bibliobús.*',$options:'i'}},{"address.postal-code":1,"address.locality":1,"organization.accesibility":1})
+db.biblio.find({$and:{title:{$regex:'.*bibliobús.*',$options:'i'},{"address.postal-code":"28022"}}}
+db.biblio.find({title:{$regex:'.*bibliobús.*',$options:'i'}}).limit(10)
+db.biblio.find({ title: { $regex: ".*semanal.*" } })
+db.biblio.find({ title: { $regex: ".*quincenal.*" } })
+db.biblio.find({$or:[{title:{$regex:".*quincenal.*"}},{title:{$regex:".*semanal.*"}}]},{title:1,_id:0})
+
+
+
+
+

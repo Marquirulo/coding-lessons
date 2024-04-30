@@ -104,7 +104,6 @@ END;
 /
 
 /*Ej6*/
-/*Ej6*/
 DECLARE
     v_contar NUMBER(3);
     CURSOR cProducto IS
